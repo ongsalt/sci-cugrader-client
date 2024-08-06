@@ -2,7 +2,7 @@
   import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
 </script>
 
-<nav class="top-0 sticky bg-white border-b px-6 py-3 flex gap-4 items-center">
+<nav class="top-0 z-10 sticky bg-background/85 backdrop-blur border-b px-4 py-3 flex gap-4 items-center">
     <h1 class="font-medium"> 37 </h1>
     <div class="h-5 border-r-2">
 

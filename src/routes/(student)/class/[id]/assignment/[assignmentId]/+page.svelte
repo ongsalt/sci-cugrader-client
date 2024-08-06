@@ -16,4 +16,8 @@
     class="p-6 grid md:grid-cols-2 2xl:grid-cols-3 max-w-screen-2xl xl:mx-auto gap-6"
 >
     <QuestionCard />
+    <QuestionCard />
+    <QuestionCard />
+    <QuestionCard />
+    <QuestionCard />
 </main>
