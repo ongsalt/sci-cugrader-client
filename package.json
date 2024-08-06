@@ -1,5 +1,5 @@
 {
-	"name": "sci-cu-grader-web",
+	"name": "37",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -25,6 +25,10 @@
 	"type": "module",
 	"dependencies": {
 		"@types/validator": "^13.12.0",
+		"clsx": "^2.1.1",
+		"svelte-radix": "^1.1.0",
+		"tailwind-merge": "^2.4.0",
+		"tailwind-variants": "^0.2.1",
 		"validator": "^13.12.0",
 		"zod": "^3.23.8"
 	}
