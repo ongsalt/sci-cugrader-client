@@ -18,7 +18,7 @@
         <div
             class={cn(
                 "border-b-2 py-1.5 border-transparent",
-                !isPortfolioPage && "border-black",
+                !isPortfolioPage && "border-cyan-500 text-cyan-600",
             )}
         >
             <a
@@ -34,7 +34,7 @@
         <div
             class={cn(
                 "border-b-2 py-1.5 border-transparent",
-                isPortfolioPage && "border-black",
+                isPortfolioPage && "border-cyan-500 text-cyan-600",
             )}
         >
             <a

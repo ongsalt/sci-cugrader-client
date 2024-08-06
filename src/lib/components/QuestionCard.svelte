@@ -2,6 +2,7 @@
     import FileBadge from "$lib/components/FileBadge.svelte";
     import ScoreBadge from "$lib/components/ScoreBadge.svelte";
 
+    const id = crypto.randomUUID()
     let files: FileList | null;
     $: file = files != null ? files[0] : null;
 
@@ -49,10 +50,10 @@
         </div>
     </div>
     <div class="p-4">
-        <input type="file" id="file-id" hidden bind:files />
+        <input type="file" id="file-input-{id}" hidden bind:files />
         {#if file == null}
             <label
-                for="file-id"
+                for="file-input-{id}"
                 class="block cursor-pointer text-center w-full rounded p-4 border border-dashed transition text-neutral-500 hover:bg-neutral-600/5"
             >
                 Drag and drop file here or <span
@@ -78,7 +79,7 @@
                         Remove
                     </button>
                     <button
-                        class="bg-blue-500 transition hover:bg-blue-600 border text-white px-4 py-2 rounded-md"
+                        class="bg-cyan-500 transition hover:bg-cyan-600 border text-white px-4 py-2 rounded-md"
                     >
                         Submit
                     </button>
