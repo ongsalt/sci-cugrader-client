@@ -1,12 +1,12 @@
 <script>
 
-    import ScoreBadge from "$lib/components/ScoreBadge.svelte";
+    import ScoreBadge from "$lib/components/score-badge.svelte";
 
 </script>
 <main class="p-6 grid md:grid-cols-2 xl:grid-cols-3 max-w-screen-2xl xl:mx-auto gap-6">
     <a
         href="/class/1/assignment/1"
-        class="block bg-white border rounded-md p-4 shadow-sm transition hover:shadow"
+        class="block bg-background border rounded-md p-4 shadow-sm transition hover:shadow"
     >
         <div class="flex justify-between">
             <div>

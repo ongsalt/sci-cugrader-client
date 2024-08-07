@@ -1,5 +1,5 @@
 import { isNumeric } from "validator";
-import { z } from "zod";
+import { z, ZodType } from "zod";
 
 export const zStudentInfo = z.object({
     Email: z.string().email(),
@@ -15,4 +15,10 @@ export const zClassInfo = z.object({
     Instructor: z.string(),
     Section: z.string().refine(isNumeric),
     Thumbnail: z.string().url().nullable(), // idk if this is url or not
+})
+
+export const apiResult = (t: ZodType) => z.object({
+    data: t.optional(),
+    msg: z.string(),
+    success: z.boolean()
 })

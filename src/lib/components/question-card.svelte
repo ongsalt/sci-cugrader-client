@@ -1,20 +1,18 @@
 <script lang="ts">
-    import FileBadge from "$lib/components/FileBadge.svelte";
-    import ScoreBadge from "$lib/components/ScoreBadge.svelte";
+    import FileBadge from "$lib/components/file-badge.svelte";
+    import ScoreBadge from "$lib/components/score-badge.svelte";
 
     const id = crypto.randomUUID()
     let files: FileList | null;
     $: file = files != null ? files[0] : null;
-
-    $: console.log(file);
-
+    
     function removeFile() {
         files = null;
     }
     // TODO: file size formatter
 </script>
 
-<div class="bg-white border rounded-md shadow-sm @container">
+<div class="bg-background border rounded-md shadow-sm @container">
     <div class="flex justify-between mt-4 px-4">
         <div>
             <h2 class="text-lg">Question 1</h2>
@@ -31,7 +29,7 @@
                     thumbnailSrc=""
                 />
             </div>
-            <p class="text-sm text-neutral-500 mt-1">
+            <p class="text-sm text-muted-foreground mt-1">
                 Uploaded: 05/08/2024 12:47
             </p>
         </div>
@@ -44,7 +42,7 @@
                     thumbnailSrc=""
                 />
             </div>
-            <p class="text-sm text-neutral-500 mt-1">
+            <p class="text-sm text-muted-foreground mt-1">
                 Submitted: 05/08/2024 12:47
             </p>
         </div>
@@ -54,7 +52,7 @@
         {#if file == null}
             <label
                 for="file-input-{id}"
-                class="block cursor-pointer text-center w-full rounded p-4 border border-dashed transition text-neutral-500 hover:bg-neutral-600/5"
+                class="block cursor-pointer text-center w-full rounded p-4 border border-dashed transition text-muted-foreground hover:bg-accent"
             >
                 Drag and drop file here or <span
                     class="underline underline-offset-2"
@@ -73,13 +71,13 @@
                 </div>
                 <div class="flex gap-2">
                     <button
-                        class="border transition hover:bg-neutral-500/10 px-4 py-2 rounded-md"
+                        class="border transition hover:bg-accent px-4 py-2 rounded-md"
                         on:click={removeFile}
                     >
                         Remove
                     </button>
                     <button
-                        class="bg-cyan-500 transition hover:bg-cyan-600 border text-white px-4 py-2 rounded-md"
+                        class="bg-primary transition hover:bg-primary-600 border text-white px-4 py-2 rounded-md"
                     >
                         Submit
                     </button>

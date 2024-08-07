@@ -1,4 +1,4 @@
-import { zStudentInfo } from "$lib/api/shared-dto"
+import { apiResult, zStudentInfo } from "$lib/api/shared-dto"
 import { defineEndpoint } from "$lib/api/utils"
 import { isNumeric } from "validator"
 import { z } from "zod"
@@ -25,16 +25,12 @@ export const authCallback = defineEndpoint({
         state: z.string(),
         url: z.string().url()
     }),
-    response: z.object({
-        data: z.object({
-            csrf_token: z.string(),
-            email: z.string().email(),
-            role: z.number(), // "1" for ST:student "2" for PF (professor i think)        
-            uid: z.string().refine(isNumeric),
-        }),
-        msg: z.string(),
-        success: z.boolean()
-    })
+    response: apiResult(z.object({
+        csrf_token: z.string(),
+        email: z.string().email(),
+        role: z.number(), // "1" for ST:student "2" for PF (professor i think)        
+        uid: z.string().refine(isNumeric),
+    }))
 })
 
 

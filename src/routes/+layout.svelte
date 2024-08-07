@@ -1,13 +1,15 @@
 <script>
     import "../app.css";
-    import Header from "./Header.svelte";
+    import { ModeWatcher } from "mode-watcher";
+    import Header from "./header.svelte";
 </script>
 
 <svelte:head>
     <title>Grader</title>
 </svelte:head>
 
-<div class="min-h-screen bg-neutral-50">
+<ModeWatcher />
+<div class="min-h-screen bg-neutral-50 dark:bg-neutral-900">
 <Header />
     <slot></slot>
 </div>

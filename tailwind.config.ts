@@ -1,5 +1,6 @@
 import { fontFamily } from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
+import { cyan } from "tailwindcss/colors";
 import containerQueries from "@tailwindcss/container-queries"
 
 const config: Config = {
@@ -22,8 +23,8 @@ const config: Config = {
         background: "hsl(var(--background) / <alpha-value>)",
         foreground: "hsl(var(--foreground) / <alpha-value>)",
         primary: {
-          DEFAULT: "hsl(var(--primary) / <alpha-value>)",
-          foreground: "hsl(var(--primary-foreground) / <alpha-value>)"
+          ...cyan,
+          DEFAULT: cyan[500]
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary) / <alpha-value>)",

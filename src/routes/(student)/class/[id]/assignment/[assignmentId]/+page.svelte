@@ -1,8 +1,8 @@
 <script>
-    import ScoreBadge from "$lib/components/ScoreBadge.svelte";
-    import Subheader from "$lib/components/Subheader.svelte";
-    import FileBadge from "$lib/components/FileBadge.svelte";
-    import QuestionCard from "$lib/components/QuestionCard.svelte";
+    import ScoreBadge from "$lib/components/score-badge.svelte";
+    import Subheader from "$lib/components/sub-header.svelte";
+    import FileBadge from "$lib/components/file-badge.svelte";
+    import QuestionCard from "$lib/components/question-card.svelte";
 </script>
 
 <Subheader title="Lab 1" subTitle="Lab 1">
