@@ -5,6 +5,9 @@ export const ssr = false
 export const prerender = false
 
 export const load: LayoutLoad = async ({ fetch }) => {
-    const res = getAuth.call({}, fetch)
-    return res
+    // TODO: error handling
+    const auth = (await getAuth.call({}, fetch)).unwrap().unwrap()
+    return {
+        auth
+    }
 }

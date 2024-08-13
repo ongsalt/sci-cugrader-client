@@ -1,4 +1,4 @@
-import { apiResult, zStudentInfo } from "$lib/api/shared-dto"
+import { apiResult, apiResultTransformer, zStudentInfo } from "$lib/api/shared"
 import { defineEndpoint } from "$lib/api/core"
 import validator from "validator"
 import { z } from "zod"
@@ -38,5 +38,6 @@ export const authCallback = defineEndpoint({
 export const getAuth = defineEndpoint({
     path: "api/glob/auth/checkauth",
     query: z.object({}),
-    response: apiResult(zStudentInfo)
+    response: apiResult(zStudentInfo),
+    transformer: apiResultTransformer
 })

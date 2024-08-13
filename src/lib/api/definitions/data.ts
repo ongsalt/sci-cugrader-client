@@ -1,4 +1,4 @@
-import { apiResult, zClassInfo, zStudentInfo } from "$lib/api/shared-dto"
+import { apiResult, zClassInfo, zStudentInfo } from "$lib/api/shared"
 import { defineEndpoint } from "$lib/api/core"
 import validator from "validator"
 import { z } from "zod"

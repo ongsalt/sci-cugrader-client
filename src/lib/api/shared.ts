@@ -1,3 +1,4 @@
+import { Result } from "@badrap/result";
 import validator from "validator";
 import { z, ZodType } from "zod";
 
@@ -20,6 +21,7 @@ export const zClassInfo = z.object({
 })
 
 export const apiResult = (t: ZodType) => z.object({
+    data: z.never(),
     msg: z.string(),
     success: z.literal(false)
 }).or(z.object({
@@ -27,3 +29,11 @@ export const apiResult = (t: ZodType) => z.object({
     msg: z.string(),
     success: z.literal(true)
 }))
+
+export function apiResultTransformer<T extends z.infer<ReturnType<typeof apiResult>>>(response: T): Result<Required<T>["data"]> {
+    if (response.success) {
+        return Result.ok(response.data as Required<T>["data"])
+    } else {
+        return Result.err(new Error(response.msg))
+    }
+}
