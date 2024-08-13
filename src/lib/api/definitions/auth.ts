@@ -1,8 +1,9 @@
 import { apiResult, zStudentInfo } from "$lib/api/shared-dto"
 import { defineEndpoint } from "$lib/api/utils"
-import { isNumeric } from "validator"
+import validator from "validator"
 import { z } from "zod"
 
+const { isNumeric } = validator
 /**
  * Auth
  *  redirect to google

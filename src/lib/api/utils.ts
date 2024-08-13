@@ -13,15 +13,25 @@ export type Endpoint<Query extends ZObject, Response extends ZObjectOrArray, Tra
     requestInit?: RequestInit
 }
 
+/*
+Thing that can fuck this up
+    - CORS
+    - Fetch Credentials
+    - SameSite=Strict,
+    - Access-Control-Allow-Credentials
+    - Google Oauth redirect URL
+        ok im done redirect_uri_mismatch
+Everything except the last one can be fixed with a proxy.
+*/
+
 export function defineEndpoint<Query extends ZObject, Response extends ZObjectOrArray, Transformed>(endpoint: Endpoint<Query, Response, Transformed>) {
     return {
         async call(query: z.infer<Query>) {
-            const url = new URL(endpoint.path, PUBLIC_BASE_API_URL)
+            const url = new URL(endpoint.path, "/api/proxied")
             for (const [key, value] of Object.entries(query)) {
                 url.searchParams.set(key, String(value))
             }
             const response = await fetch(url, {
-                mode: "no-cors",
                 credentials: "include",
                 // method: "POST",
                 headers: {
@@ -30,11 +40,11 @@ export function defineEndpoint<Query extends ZObject, Response extends ZObjectOr
                 ...(endpoint.requestInit)
             })
             // idk why i need type hint here
-            const result: SafeParseReturnType<any, z.infer<Response>> = await endpoint.response.safeParseAsync(await response.json())
-            if (result.success && endpoint.transformer) {
-                return endpoint.transformer(result.data)
-            }
-            return result       
+            const t = await response.text()
+            console.log(t)
+            const result: SafeParseReturnType<any, z.infer<Response>> = await endpoint.response.safeParseAsync(JSON.parse(t))
+
+            return result
         }
     }
 }

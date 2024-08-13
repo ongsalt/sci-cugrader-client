@@ -1,5 +1,7 @@
-import { isNumeric } from "validator";
+import validator from "validator";
 import { z, ZodType } from "zod";
+
+const { isNumeric } = validator;
 
 export const zStudentInfo = z.object({
     Email: z.string().email(),

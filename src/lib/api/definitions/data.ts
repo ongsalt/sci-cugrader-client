@@ -1,7 +1,9 @@
 import { apiResult, zClassInfo, zStudentInfo } from "$lib/api/shared-dto"
 import { defineEndpoint } from "$lib/api/utils"
-import { isNumeric } from "validator"
+import validator from "validator"
 import { z } from "zod"
+
+const { isNumeric } = validator
 
 export const getStudentProfile = defineEndpoint({
     path: "/api/ST/user/profile",

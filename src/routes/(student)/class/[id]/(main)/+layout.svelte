@@ -1,7 +1,7 @@
 <script>
     import { page } from "$app/stores";
     import Subheader from "$lib/components/sub-header.svelte";
-    import { cn } from "$lib/utils";
+    import { cn } from "$lib/utils/ui";
     import { User } from "lucide-svelte"
 
     $: isPortfolioPage =

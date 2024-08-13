@@ -1,1 +1,3 @@
-// For now, login is broken.
+export function loginWithCookie(cookie: string) {
+
+}
