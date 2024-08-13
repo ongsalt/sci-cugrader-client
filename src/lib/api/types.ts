@@ -20,7 +20,7 @@ export type AssignmentMeta = {
         name: string,
         lab: string,
     },
-    question: Question[]
+    questions: Question[]
 }
 
 export type Question = {

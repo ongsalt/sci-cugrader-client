@@ -126,7 +126,7 @@ export const getStudentAssignment = defineEndpoint({
                 name: it.Info.Name,
                 lab: it.Info.Lab,
             },
-            question: it.Question.map(it => ({
+            questions: it.Question.map(it => ({
                 id: it.QID,
                 date: parseApiDate(it.Date),
                 maxScore: it.Max,

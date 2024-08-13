@@ -1,7 +1,6 @@
 <script lang="ts">
     import { page } from "$app/stores";
     import Subheader from "$lib/components/sub-header.svelte";
-    import { defineRoute } from "$lib/navigation";
     import { cn } from "$lib/utils/ui";
     import type { LayoutData } from "./$types";
 

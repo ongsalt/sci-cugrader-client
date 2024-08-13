@@ -13,6 +13,6 @@ export function defineRoute(name: string, route?: string) {
         })
     })
     onDestroy(() => {
-        navigationStack.update(it => it.splice(-1, 1))
+        navigationStack.update(it => it.toSpliced(-1, 1))
     })
 }

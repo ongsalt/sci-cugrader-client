@@ -1,10 +1,8 @@
 <script lang="ts">
     import "../app.css";
-    import { navigationStack } from "$lib/navigation";
     import { ModeWatcher } from "mode-watcher";
     import Header from "./header.svelte";
 
-    $: console.log($navigationStack)
 </script>
 
 <svelte:head>

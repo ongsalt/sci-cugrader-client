@@ -1,6 +1,10 @@
 <script lang="ts">
     import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
-    import { User } from "lucide-svelte";
+    import { Route, User } from "lucide-svelte";
+    import { navigationStack } from "$lib/navigation";
+
+    $: last = $navigationStack.at(-1);
+    $: rest = $navigationStack.toSpliced(-1, 1);
 </script>
 
 <nav
@@ -11,24 +15,24 @@
         <div class="h-5 border-r-2"></div>
         <Breadcrumb.Root>
             <Breadcrumb.List>
+                {#each rest as route}
+                    <Breadcrumb.Item>
+                        <Breadcrumb.Link href={route.route}
+                            >{route.name}</Breadcrumb.Link
+                        >
+                    </Breadcrumb.Item>
+                    <Breadcrumb.Separator />
+                {/each}
                 <Breadcrumb.Item>
-                    <Breadcrumb.Link href="/home">Home</Breadcrumb.Link>
-                </Breadcrumb.Item>
-                <Breadcrumb.Separator />
-                <Breadcrumb.Item>
-                    <Breadcrumb.Link href="/class/1"
-                        >Programming</Breadcrumb.Link
-                    >
-                </Breadcrumb.Item>
-                <Breadcrumb.Separator />
-                <Breadcrumb.Item>
-                    <Breadcrumb.Page>Lab 1</Breadcrumb.Page>
+                    <Breadcrumb.Page>{last?.name ?? "Page"}</Breadcrumb.Page>
                 </Breadcrumb.Item>
             </Breadcrumb.List>
         </Breadcrumb.Root>
     </div>
-    <div class="rounded-full overflow-clip w-8 h-8 bg-primary-50 flex items-center justify-center">
+    <div
+        class="rounded-full overflow-clip w-8 h-8 bg-primary-50 flex items-center justify-center"
+    >
         <!-- <img src="" alt="" class="w-8 h-8"> -->
-        <User class="w-5 text-primary"/>
+        <User class="w-5 text-primary" />
     </div>
 </nav>

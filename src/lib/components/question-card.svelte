@@ -1,8 +1,13 @@
 <script lang="ts">
+    import type { Question } from "$lib/api/types";
     import FileBadge from "$lib/components/file-badge.svelte";
     import ScoreBadge from "$lib/components/score-badge.svelte";
 
-    const id = crypto.randomUUID()
+    export let question: Question
+    export let index: number
+
+    const { id, date, maxScore, score, submission } = question
+
     let files: FileList | null;
     $: file = files != null ? files[0] : null;
     
@@ -15,7 +20,7 @@
 <div class="bg-background border rounded-md shadow-sm @container">
     <div class="flex justify-between mt-4 px-4">
         <div>
-            <h2 class="text-lg">Question 1</h2>
+            <h2 class="text-lg">Question {index}</h2>
         </div>
         <ScoreBadge>6.67/10</ScoreBadge>
     </div>
