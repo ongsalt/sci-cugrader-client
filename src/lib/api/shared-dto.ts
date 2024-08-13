@@ -20,7 +20,10 @@ export const zClassInfo = z.object({
 })
 
 export const apiResult = (t: ZodType) => z.object({
-    data: t.optional(),
     msg: z.string(),
-    success: z.boolean()
-})
+    success: z.literal(false)
+}).or(z.object({
+    data: t,
+    msg: z.string(),
+    success: z.literal(true)
+}))

@@ -4,6 +4,7 @@ import type { LayoutLoad } from "./$types";
 export const ssr = false
 export const prerender = false
 
-export const load: LayoutLoad = async ({ }) => {
-
+export const load: LayoutLoad = async ({ fetch }) => {
+    const res = getAuth.call({}, fetch)
+    return res
 }

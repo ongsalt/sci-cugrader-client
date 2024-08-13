@@ -1,5 +1,5 @@
 import { apiResult, zStudentInfo } from "$lib/api/shared-dto"
-import { defineEndpoint } from "$lib/api/utils"
+import { defineEndpoint } from "$lib/api/core"
 import validator from "validator"
 import { z } from "zod"
 
@@ -15,13 +15,13 @@ const { isNumeric } = validator
  *   authuser={some number}
  *   hd={chula email domain}
  *   prompt=none
- *  which is a page that will call /api/glob/auth/callback?state&url
+ *  which is a page that will call api/glob/auth/callback?state&url
  *   state={google state}
  *   url={/callback?whatever}
  */
 
 export const authCallback = defineEndpoint({
-    path: "/api/glob/auth/callback",
+    path: "api/glob/auth/callback",
     query: z.object({
         state: z.string(),
         url: z.string().url()
@@ -36,11 +36,7 @@ export const authCallback = defineEndpoint({
 
 
 export const getAuth = defineEndpoint({
-    path: "/api/glob/auth/checkauth",
+    path: "api/glob/auth/checkauth",
     query: z.object({}),
-    response: z.object({
-        data: zStudentInfo,
-        msg: z.string(),
-        success: z.boolean()
-    })
+    response: apiResult(zStudentInfo)
 })

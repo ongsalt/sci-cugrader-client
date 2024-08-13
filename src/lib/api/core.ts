@@ -1,11 +1,9 @@
-import { PUBLIC_BASE_API_URL } from "$env/static/public"
-import { z, ZodArray, ZodObject, ZodRecord, type SafeParseReturnType } from "zod"
+import { PUBLIC_PROXY_BASE_URL } from "$env/static/public"
+import { z, ZodType, type SafeParseReturnType } from "zod"
 
 // We use zod here in case of api definition change. 
-type ZObject = ZodObject<{}> | ZodRecord
-type ZObjectOrArray = ZObject | ZodArray<ZObject>
 
-export type Endpoint<Query extends ZObject, Response extends ZObjectOrArray, Transformed = z.infer<Response>> = {
+export type Endpoint<Query extends ZodType, Response extends ZodType, Transformed = z.infer<Response>> = {
     path: string
     query: Query,
     response: Response,
@@ -24,10 +22,11 @@ Thing that can fuck this up
 Everything except the last one can be fixed with a proxy.
 */
 
-export function defineEndpoint<Query extends ZObject, Response extends ZObjectOrArray, Transformed>(endpoint: Endpoint<Query, Response, Transformed>) {
+export function defineEndpoint<Query extends ZodType, Response extends ZodType, Transformed>(endpoint: Endpoint<Query, Response, Transformed>) {
     return {
-        async call(query: z.infer<Query>) {
-            const url = new URL(endpoint.path, "/api/proxied")
+        async call(query: z.infer<Query>, fetch = window.fetch) {
+            const url = new URL(endpoint.path, PUBLIC_PROXY_BASE_URL)
+            console.log(url.pathname)
             for (const [key, value] of Object.entries(query)) {
                 url.searchParams.set(key, String(value))
             }

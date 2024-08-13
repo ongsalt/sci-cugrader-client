@@ -1,24 +1,24 @@
 import { apiResult, zClassInfo, zStudentInfo } from "$lib/api/shared-dto"
-import { defineEndpoint } from "$lib/api/utils"
+import { defineEndpoint } from "$lib/api/core"
 import validator from "validator"
 import { z } from "zod"
 
 const { isNumeric } = validator
 
 export const getStudentProfile = defineEndpoint({
-    path: "/api/ST/user/profile",
+    path: "api/ST/user/profile",
     query: z.object({}),
     response: zStudentInfo,
 })
 
 export const getStudentClasses = defineEndpoint({
-    path: "/api/ST/class/classes",
+    path: "api/ST/class/classes",
     query: z.object({}),
     response: z.record(z.string(), zClassInfo) // key example "1/2024"
 })
 
 export const getStudentClass = defineEndpoint({
-    path: "/api/TA/class/class", // why it's TA
+    path: "api/TA/class/class", // why it's TA
     query: z.object({
         CSYID: z.number() // stands for class StudyYear? id
     }),
@@ -30,7 +30,7 @@ export const getStudentClass = defineEndpoint({
 })
 
 export const getStudentAssignments = defineEndpoint({
-    path: "/api/ST/assignment/all", // why it's TA
+    path: "api/ST/assignment/all", // why it's TA
     query: z.object({
         CID: z.number() // probably class id
     }),
@@ -49,7 +49,7 @@ export const getStudentAssignments = defineEndpoint({
 })
 
 export const getStudentAssignment = defineEndpoint({
-    path: "/api/ST/assignment/all", // why it's TA
+    path: "api/ST/assignment/all", // why it's TA
     query: z.object({
         LID: z.number() // probably lab id
     }),
@@ -80,7 +80,7 @@ export const getStudentAssignment = defineEndpoint({
 })
 
 export const getStudentRank = defineEndpoint({
-    path: "/api/ST/class/rank",
+    path: "api/ST/class/rank",
     query: z.object({
         CSYID: z.number()
     }),

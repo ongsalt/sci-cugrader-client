@@ -1,12 +1,31 @@
 import { json } from "@sveltejs/kit";
 import type { RequestHandler } from "./$types";
+import { PUBLIC_BASE_API_URL } from "$env/static/public";
 
-const handler: RequestHandler = ({ params, request }) => {
-    const headers = request.headers
-    const body = request.text()
-    console.log({ headers, body, params })
-    return json("")
+// This is probably the most stupid proxy ever 
+const makeHandler = (method: "GET" | "POST"): RequestHandler => async ({ params, request, cookies }) => {
+    const { headers } = request
+    const csrfToken = cookies.get("csrf_token") ?? ""
+    
+    // I hate cors
+    headers.delete("host")
+    // headers.set("sec-fetch-dest", "empty")
+    // headers.set("sec-fetch-mode", "cors")
+    // headers.set("sec-fetch-site", "same-origin")
+    headers.set("x-csrf-token", csrfToken)
+    // headers.set("referrer-policy", "strict-origin-when-cross-origin")
+    headers.delete("sec-fetch-mode")
+    headers.delete("sec-fetch-site")
+    headers.delete("sec-fetch-dest")
+    // headers.set("referer", "https://sci.cugrader.com")
+
+    const url = new URL(params.path, PUBLIC_BASE_API_URL)
+    return await fetch(url, {
+        headers,
+        body: method === "GET" ? null : await request.text(),
+        method
+    })
 }
 
-export const GET = handler 
-export const POST = handler 
+export const GET = makeHandler("GET")
+export const POST = makeHandler("POST") 
