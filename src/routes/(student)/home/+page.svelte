@@ -1,19 +1,15 @@
 <script lang="ts">
-    import type { Class } from "$lib/api/types";
+    import type { PageData } from "./$types";
     import YearSection from "./year-section.svelte";
-    const classes: Class[] = [
-        {
-            code: "2301173",
-            id: 1,
-            instructor: "Naruemon Pratanwanich",
-            name: "Programming",
-            section: "4",
-        },
-    ];
+    export let data: PageData;
+
+    const { classes } = data;
 </script>
 
 <main class="p-6">
     <div class="space-y-4">
-        <YearSection {classes} />
+        {#each Object.entries(classes) as [semaster, classesInSemaster]}
+            <YearSection {semaster} classes={classesInSemaster} />
+        {/each}
     </div>
 </main>

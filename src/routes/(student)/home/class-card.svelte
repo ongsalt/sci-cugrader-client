@@ -5,7 +5,7 @@
 </script>
 
 <a
-    href="/class/{classInfo.code}"
+    href="/class/{classInfo.id}"
     class="border rounded-md bg-background shadow-sm transition hover:shadow"
 >
     <div class="p-4 flex gap-4 items-stretch">

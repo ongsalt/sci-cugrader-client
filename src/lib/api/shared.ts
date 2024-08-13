@@ -20,20 +20,31 @@ export const zClassInfo = z.object({
     Thumbnail: z.string().url().nullable(), // idk if this is url or not
 })
 
-export const apiResult = (t: ZodType) => z.object({
-    data: z.never(),
-    msg: z.string(),
-    success: z.literal(false)
-}).or(z.object({
-    data: t,
-    msg: z.string(),
-    success: z.literal(true)
-}))
 
-export function apiResultTransformer<T extends z.infer<ReturnType<typeof apiResult>>>(response: T): Result<Required<T>["data"]> {
-    if (response.success) {
-        return Result.ok(response.data as Required<T>["data"])
-    } else {
-        return Result.err(new Error(response.msg))
-    }
+
+export function apiResult<T extends ZodType>(t: T) {
+    return z.object({
+        data: z.never(),
+        msg: z.string(),
+        success: z.literal(false)
+    }).or(z.object({
+        data: t,
+        msg: z.string(),
+        success: z.literal(true)
+    })).transform(it => {
+        if (it.success) {
+            return Result.ok(it.data as z.infer<T>)
+        } else {
+            return Result.err(new Error(it.msg))
+        }
+    })
+}
+
+export function parseApiDate(str: string) {
+    // in "dd/mm/yyyy hh:mm" 
+    // TODO: validate input
+    const [date, time] = str.split(" ")
+    const [day, month, year] = date.split("/").map(it => parseInt(it))
+    const [hour, minute] = time.split(":").map(it => parseInt(it))
+    return new Date(year, month - 1, day, hour, minute)
 }

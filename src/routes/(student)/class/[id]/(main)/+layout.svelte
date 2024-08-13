@@ -1,17 +1,25 @@
-<script>
+<script lang="ts">
     import { page } from "$app/stores";
     import Subheader from "$lib/components/sub-header.svelte";
+    import { defineRoute } from "$lib/navigation";
     import { cn } from "$lib/utils/ui";
-    import { User } from "lucide-svelte"
+    import type { LayoutData } from "./$types";
 
-    $: isPortfolioPage =
-        $page.url.pathname == `/class/${$page.params.id}/portfolio`;
+    export let data: LayoutData;
+    const { classMeta } = data;
+    const classId = $page.params.id;
+
+    $: isPortfolioPage = $page.url.pathname == `/class/${classId}/portfolio`;
 </script>
 
-<Subheader title="Programming" subTitle="2301173 • 1/2024" imageUrl="sd">
+<Subheader
+    title={classMeta.name}
+    subTitle="{classMeta.code} • {classMeta.semaster}"
+    imageUrl={classMeta.thumbnail}
+>
     <div class="mt-3 flex items-center gap-1" slot="description">
         <span class="text-muted-foreground">Instructor</span>
-        <p> Naruemon Pratanwanich</p>
+        <p>{classMeta.instructor}</p>
     </div>
 
     <nav class="flex" slot="navigation">

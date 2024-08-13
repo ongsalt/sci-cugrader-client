@@ -23,7 +23,7 @@ Thing that can fuck this up
 Everything except the last one can be fixed with a proxy.
 */
 
-export function defineEndpoint<Query extends ZodType, Response extends ZodType, Transformed = Response>(endpoint: Endpoint<Query, Response, Transformed>) {
+export function defineEndpoint<Query extends ZodType, Response extends ZodType, Transformed = z.infer<Response>>(endpoint: Endpoint<Query, Response, Transformed>) {
     if (!endpoint.transformer) {
         endpoint.transformer = (it) => it
     }

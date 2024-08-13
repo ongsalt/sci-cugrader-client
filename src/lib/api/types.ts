@@ -1,11 +1,44 @@
-export type Question = {
-    date: Date,
-    id: number,
+export type Assignment = {
+    due: Date,
+    publish: Date,
+    id: number, // LID
+    lab: string, // lab
+    name: string,
+    isLate: boolean,
+    isTurnedIn: boolean,
+    hideScore: boolean,
     maxScore: number,
-    score: number
-    hideScore: boolean
+    score: number,
 }
 
+export type AssignmentMeta = {
+    info: {
+        due: Date,
+        publish: Date,
+        isLate: boolean,
+        isLocked: boolean,
+        name: string,
+        lab: string,
+    },
+    question: Question[]
+}
+
+export type Question = {
+    id: number,
+    date: Date,
+    maxScore: number,
+    score: number,
+    hideScore: boolean,
+    submission?: {
+        date: Date,
+        filename: string,
+        isLate: boolean,
+        originalName: string,
+        id: number
+    },
+}
+
+// Return by getAll
 export type Class = {
     code: string,
     name: string,
@@ -15,3 +48,12 @@ export type Class = {
     thumbnail?: string,
 }
 
+// Return by get specific
+export type ClassMeta = {
+    archive: boolean,
+    code: string,// ClassID
+    name: string,
+    semaster: string, // ClassYear
+    instructor: string,
+    thumbnail?: string,
+}

@@ -1,8 +1,10 @@
-<script>
-    import ScoreBadge from "$lib/components/score-badge.svelte";
-    import Subheader from "$lib/components/sub-header.svelte";
-    import FileBadge from "$lib/components/file-badge.svelte";
+<script lang="ts">
     import QuestionCard from "$lib/components/question-card.svelte";
+    import Subheader from "$lib/components/sub-header.svelte";
+    import type { PageData } from "./$types";
+
+    export let data: PageData;
+    const { assignments } = data;
 </script>
 
 <Subheader title="Lab 1" subTitle="Lab 1">

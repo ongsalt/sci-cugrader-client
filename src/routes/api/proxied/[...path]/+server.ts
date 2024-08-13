@@ -3,10 +3,10 @@ import type { RequestHandler } from "./$types";
 import { PUBLIC_BASE_API_URL } from "$env/static/public";
 
 // This is probably the most stupid proxy ever 
-const makeHandler = (method: "GET" | "POST"): RequestHandler => async ({ params, request, cookies }) => {
+const makeHandler = (method: "GET" | "POST"): RequestHandler => async ({ params, request, cookies, url }) => {
     const { headers } = request
     const csrfToken = cookies.get("csrf_token") ?? ""
-    
+
     // I hate cors
     headers.delete("host")
     // headers.set("sec-fetch-dest", "empty")
@@ -19,8 +19,12 @@ const makeHandler = (method: "GET" | "POST"): RequestHandler => async ({ params,
     headers.delete("sec-fetch-dest")
     // headers.set("referer", "https://sci.cugrader.com")
 
-    const url = new URL(params.path, PUBLIC_BASE_API_URL)
-    return await fetch(url, {
+    const target = new URL(params.path, PUBLIC_BASE_API_URL)
+    url.searchParams.forEach((value, key) => {
+        target.searchParams.append(key, value)
+    })
+
+    return await fetch(target, {
         headers,
         body: method === "GET" ? null : await request.text(),
         method
