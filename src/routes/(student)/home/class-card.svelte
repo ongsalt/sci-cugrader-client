@@ -6,7 +6,7 @@
 
 <a
     href="/class/{classInfo.id}"
-    class="border rounded-md bg-background shadow-sm transition hover:shadow"
+    class="border rounded-md bg-background shadow-sm transition hover:shadow-md"
 >
     <div class="p-4 flex gap-4 items-stretch">
         <img src="" alt="" class="h-12 w-12" />

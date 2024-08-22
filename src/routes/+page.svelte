@@ -5,7 +5,7 @@
 </script>
 
 <main class="p-6">
-    <h1>Welcome to SvelteKit</h1>
+    <h1>totally not inspired by triangle company</h1>
     <p>Please login (chula email only)</p>
 
     <div>

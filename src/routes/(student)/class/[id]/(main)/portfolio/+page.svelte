@@ -1,10 +1,19 @@
-<main class="p-6 grid grid-rows-[auto_auto] max-w-screen-md mx-auto gap-6">
+<script lang="ts">
+    import type { PageData } from "./$types";
+
+    export let data: PageData;
+    const { ranking } = data;
+</script>
+
+<main class="p-6 grid grid-rows-[auto_auto] gap-6">
     <div class="grid grid-cols-2 gap-6">
         <div class="border rounded-md bg-background p-4">
             <h1 class="font-medium">Score</h1>
             <h2 class="text-4xl mt-2 text-primary">
-                56
-                <span class="text-xl text-muted-foreground">out of 150</span>
+                {ranking.score}
+                <span class="text-xl text-muted-foreground"
+                    >of {ranking.maxScore}</span
+                >
             </h2>
         </div>
         <div
@@ -12,8 +21,10 @@
         >
             <h1 class="font-medium">Rank</h1>
             <h2 class="text-4xl mt-2">
-                14
-                <span class="text-xl text-white/50">of 94</span>
+                {ranking.rank}
+                <span class="text-xl text-white/50"
+                    >of {ranking.studentCount}</span
+                >
             </h2>
         </div>
     </div>

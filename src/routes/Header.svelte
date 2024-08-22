@@ -30,9 +30,9 @@
         </Breadcrumb.Root>
     </div>
     <div
-        class="rounded-full overflow-clip w-8 h-8 bg-primary-50 flex items-center justify-center"
+        class="rounded-full overflow-clip w-8 h-8 bg-muted flex items-center justify-center"
     >
         <!-- <img src="" alt="" class="w-8 h-8"> -->
-        <User class="w-5 text-primary" />
+        <User class="w-5" />
     </div>
 </nav>

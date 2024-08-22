@@ -1,6 +1,7 @@
 <script lang="ts">
     import ScoreBadge from "$lib/components/score-badge.svelte";
     import type { Assignment } from "$lib/api/types";
+    import { formatDate } from "$lib/utils/date";
 
     export let classId: string;
     export let assignment: Assignment;
@@ -8,7 +9,7 @@
 
 <a
     href="/class/{classId}/assignment/{assignment.id}"
-    class="block bg-background border rounded-md p-4 shadow-sm transition hover:shadow"
+    class="block bg-background border rounded-md p-4 shadow-sm transition hover:shadow-md"
 >
     <div class="flex justify-between">
         <div>
@@ -20,7 +21,7 @@
     </div>
     <div class="mt-2 flex flex-wrap justify-between gap-x-3 gap-y-0">
         <!-- TODO: format date -->
-        <p>[publish] {assignment.publish}</p>
-        <p>[due] {assignment.due}</p>
+        <p>[publish] {formatDate(assignment.publish)}</p>
+        <p>[due] {formatDate(assignment.due)}</p>
     </div>
 </a>

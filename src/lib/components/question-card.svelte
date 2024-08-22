@@ -2,15 +2,16 @@
     import type { Question } from "$lib/api/types";
     import FileBadge from "$lib/components/file-badge.svelte";
     import ScoreBadge from "$lib/components/score-badge.svelte";
+    import { formatDate } from "$lib/utils/date";
 
-    export let question: Question
-    export let index: number
+    export let question: Question;
+    export let index: number;
 
-    const { id, date, maxScore, score, submission } = question
+    const { id, date, maxScore, score, submission } = question;
 
     let files: FileList | null;
     $: file = files != null ? files[0] : null;
-    
+
     function removeFile() {
         files = null;
     }
@@ -22,34 +23,30 @@
         <div>
             <h2 class="text-lg">Question {index}</h2>
         </div>
-        <ScoreBadge>6.67/10</ScoreBadge>
+        <ScoreBadge>{score}/{maxScore}</ScoreBadge>
     </div>
     <div class="grid @xl:grid-cols-2 px-4 gap-x-4 gap-y-2 border-b pb-3">
         <div>
-            <h3>Attachments</h3>
+            <h3 class="text-muted-foreground">Attachments</h3>
             <div class="flex flex-wrap gap-2 mt-1">
                 <FileBadge
                     name="6734468123-L1-Q2.ipynb"
-                    description="1.2 MB"
+                    description={formatDate(date)}
                     thumbnailSrc=""
                 />
             </div>
-            <p class="text-sm text-muted-foreground mt-1">
-                Uploaded: 05/08/2024 12:47
-            </p>
         </div>
         <div>
-            <h3>Submission</h3>
-            <div class="flex flex-wrap gap-2 mt-1">
-                <FileBadge
-                    name="6734468123-L1-Q2.ipynb"
-                    description="1.2 MB"
-                    thumbnailSrc=""
-                />
-            </div>
-            <p class="text-sm text-muted-foreground mt-1">
-                Submitted: 05/08/2024 12:47
-            </p>
+            <h3 class="text-muted-foreground">Submission</h3>
+            {#if submission}
+                <div class="flex flex-wrap gap-2 mt-1">
+                    <FileBadge
+                        name={submission.filename}
+                        description={formatDate(submission.date)}
+                        thumbnailSrc=""
+                    />
+                </div>
+            {/if}
         </div>
     </div>
     <div class="p-4">

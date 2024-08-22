@@ -1,6 +1,6 @@
 import { defineEndpoint } from "$lib/api/core"
 import { apiResult, parseApiDate, zClassInfo, zStudentInfo } from "$lib/api/shared"
-import type { Assignment, AssignmentMeta, Class, ClassMeta, Question } from "$lib/api/types"
+import type { Assignment, AssignmentMeta, Class, ClassMeta, Question, Ranking } from "$lib/api/types"
 import validator from "validator"
 import { z } from "zod"
 
@@ -155,5 +155,11 @@ export const getStudentRank = defineEndpoint({
         MaxScore: z.number(),
         Rank: z.number(),
         Score: z.number(),
-    })),
+    }).transform(it => ({
+        maxScore: it.MaxScore,
+        rank: it.Rank,
+        score: it.Score,
+        studentCount: it.Amount,
+        stats: it.Chart
+    } satisfies Ranking))),
 })

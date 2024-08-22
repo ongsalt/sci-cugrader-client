@@ -29,7 +29,7 @@
             )}
         >
             <a
-                href="/class/1/"
+                href={isPortfolioPage ? `/class/${classId}/` : ""}
                 class={cn(
                     "block rounded hover:bg-accent p-3 py-2 text-sm",
                     isPortfolioPage && "text-muted-foreground",
@@ -45,7 +45,7 @@
             )}
         >
             <a
-                href="/class/1/portfolio"
+                href={isPortfolioPage ? "" : `/class/${classId}/portfolio`}
                 class={cn(
                     "block rounded hover:bg-accent p-3 py-2 text-sm",
                     !isPortfolioPage && "text-muted-foreground",

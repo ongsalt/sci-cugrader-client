@@ -38,6 +38,14 @@ export type Question = {
     },
 }
 
+export type Ranking = {
+    rank: number,
+    studentCount: number
+    score: number,
+    maxScore: number,
+    stats: number[] // size:10
+}
+
 // Return by getAll
 export type Class = {
     code: string,

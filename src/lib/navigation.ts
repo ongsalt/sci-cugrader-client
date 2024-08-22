@@ -6,12 +6,13 @@ export type NamedRoute = { name: string; route: string, shortName?: string, desc
 export const navigationStack = writable<NamedRoute[]>([])
 
 export function defineRoute(name: string, route?: string) {
-    onMount(() => {
+    // BRUH sveltekit will run onmount from inside out
+    // onMount(() => {
         navigationStack.update(old => {
             route = route ?? get(page).url.href
             return [...old, { name, route }]
         })
-    })
+    // })
     onDestroy(() => {
         navigationStack.update(it => it.toSpliced(-1, 1))
     })
