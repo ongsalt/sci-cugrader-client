@@ -94,6 +94,7 @@ export const getStudentAssignment = defineEndpoint({
         LID: z.number() // probably lab id
     }),
     response: apiResult(z.object({
+        AddFile: z.number().array(),
         Info: z.object({
             Due: z.string(), // in "dd/mm/yyyy hh:mm" 
             Lab: z.string().refine(isNumeric),
@@ -125,6 +126,7 @@ export const getStudentAssignment = defineEndpoint({
                 isLocked: it.Info.Lock,
                 name: it.Info.Name,
                 lab: it.Info.Lab,
+                attachmentIds: it.AddFile
             },
             questions: it.Question.map(it => ({
                 id: it.QID,
