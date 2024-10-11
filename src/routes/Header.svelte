@@ -1,7 +1,12 @@
 <script lang="ts">
     import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
-    import { Route, User } from "lucide-svelte";
+    import { User } from "lucide-svelte";
     import { navigationStack } from "$lib/navigation";
+    import Menu from "./menu.svelte";
+    import type { z } from "zod";
+    import type { zStudentInfo } from "$lib/api/shared";
+
+    export let auth: z.infer<typeof zStudentInfo> | null
 
     $: last = $navigationStack.at(-1);
     $: rest = $navigationStack.toSpliced(-1, 1);
@@ -29,10 +34,5 @@
             </Breadcrumb.List>
         </Breadcrumb.Root>
     </div>
-    <div
-        class="rounded-full overflow-clip w-8 h-8 bg-muted flex items-center justify-center"
-    >
-        <!-- <img src="" alt="" class="w-8 h-8"> -->
-        <User class="w-5" />
-    </div>
+    <Menu {auth}/>
 </nav>

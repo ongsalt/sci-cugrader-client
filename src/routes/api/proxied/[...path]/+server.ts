@@ -1,6 +1,7 @@
-import { json } from "@sveltejs/kit";
-import type { RequestHandler } from "./$types";
 import { PUBLIC_BASE_API_URL } from "$env/static/public";
+import type { RequestHandler } from "./$types";
+
+// WHY DIDNT I JUST FUCKING SERIALIZE the COOKIES AND the  BODY TOGETHER 
 
 // This is probably the most stupid proxy ever 
 const makeHandler = (method: "GET" | "POST"): RequestHandler => async ({ params, request, cookies, url }) => {

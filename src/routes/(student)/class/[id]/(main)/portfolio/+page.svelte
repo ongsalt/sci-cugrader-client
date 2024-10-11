@@ -31,5 +31,6 @@
     <div class="border rounded-md bg-background p-4">
         <h1 class="font-medium">Statistics</h1>
         <p>some graph here</p>
+        <p>{JSON.stringify(ranking)}</p>
     </div>
 </main>

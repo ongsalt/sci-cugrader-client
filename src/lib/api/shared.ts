@@ -20,11 +20,9 @@ export const zClassInfo = z.object({
     Thumbnail: z.string().url().nullable(), // idk if this is url or not
 })
 
-
-
 export function apiResult<T extends ZodType>(t: T) {
     return z.object({
-        data: z.never(),
+        data: z.never().or(z.undefined()), // TODO: fix this 
         msg: z.string(),
         success: z.literal(false)
     }).or(z.object({

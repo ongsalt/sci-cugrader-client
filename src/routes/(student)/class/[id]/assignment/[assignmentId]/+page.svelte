@@ -7,7 +7,7 @@
 </script>
 
 <main
-    class="p-6 grid md:grid-cols-2 2xl:grid-cols-3 max-w-screen-2xl xl:mx-auto gap-6"
+    class="p-6 grid md:grid-cols-2 2xl:grid-cols-3 gap-6"
 >
     {#each questions as question, index}
         <QuestionCard {question} index={index + 1}/>

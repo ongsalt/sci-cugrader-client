@@ -6,7 +6,7 @@
 
 <main class="p-6">
     <h1>totally not inspired by triangle company</h1>
-    <p>Please login (chula email only)</p>
+    <p>Please login by copying the cookie from sci.cugrader.com</p>
 
     <div>
         <a class="text-primary underline-offset-2 underline" href="/home"

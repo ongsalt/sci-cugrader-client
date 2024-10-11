@@ -34,7 +34,6 @@ export const authCallback = defineEndpoint({
     }))
 })
 
-
 export const getAuth = defineEndpoint({
     path: "api/glob/auth/checkauth",
     query: z.object({}),
