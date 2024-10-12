@@ -5,19 +5,21 @@
 </script>
 
 <main class="p-6">
-    <h1>totally not inspired by triangle company</h1>
+    <h1>The design is totally not inspired by a certain triangle company</h1>
     <p>Please login by copying the cookie from sci.cugrader.com</p>
 
     <div>
         <a class="text-primary underline-offset-2 underline" href="/home"
             >Home</a
         >
-        <a class="text-primary underline-offset-2 underline" href="/signin"
-            >Sign In</a
+        <a class="text-primary underline-offset-2 underline" href="/login"
+            >Log In</a
         >
     </div>
 
     <div class="mt-8">
-        {JSON.stringify(data)}
+        <p class="text-destructive">
+            This is uncomplete you can't download or submit a file here
+        </p>
     </div>
 </main>

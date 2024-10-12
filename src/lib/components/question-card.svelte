@@ -3,6 +3,7 @@
     import FileBadge from "$lib/components/file-badge.svelte";
     import ScoreBadge from "$lib/components/score-badge.svelte";
     import { formatDate } from "$lib/utils/date";
+    import { Trash, Download } from "lucide-svelte";
 
     export let question: Question;
     export let index: number;
@@ -30,9 +31,16 @@
             <h3 class="text-muted-foreground">Attachments</h3>
             <div class="flex flex-wrap gap-2 mt-1">
                 <FileBadge
-                    name="6734468123-L1-Q2.ipynb"
+                    name="[TODO: parse file name]"
                     description={formatDate(date)}
                     thumbnailSrc=""
+                    actions={[
+                        {
+                            name: "Download",
+                            icon: Download,
+                            action: () => console.log("test"),
+                        },
+                    ]}
                 />
             </div>
         </div>
@@ -44,6 +52,19 @@
                         name={submission.filename}
                         description={formatDate(submission.date)}
                         thumbnailSrc=""
+                        actions={[
+                            {
+                                name: "Download",
+                                icon: Download,
+                                action: () => console.log("test"),
+                            },
+                            {
+                                name: "Delete",
+                                icon: Trash,
+                                action: () => console.log("test"),
+                                type: "destructive"
+                            },
+                        ]}    
                     />
                 </div>
             {/if}

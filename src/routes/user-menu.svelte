@@ -13,7 +13,7 @@
 <Popover.Root>
     <Popover.Trigger>
         <div
-            class="rounded-full overflow-clip w-8 h-8 bg-muted flex items-center justify-center"
+            class="rounded-full overflow-clip w-8 h-8 bg-muted flex items-center justify-center hover:bg-muted-foreground/15 transition"
         >
             <!-- <img src="" alt="" class="w-8 h-8"> -->
             {#if auth !== null}
@@ -44,12 +44,23 @@
             {/if}
         </div>
         <div class="p-1">
-            <button
-                class="p-2 rounded-sm hover:bg-destructive/5 text-destructive transition w-full flex justify-between items-center"
-            >
-                Log out
-                <LogOut class="w-4" />
-            </button>
+            {#if auth !== null}
+                <a
+                    class="p-2 rounded-sm hover:bg-destructive/5 text-destructive transition w-full flex justify-between items-center"
+                    href="/logout"
+                >
+                    Log out
+                    <LogOut class="w-4" />
+                </a>
+            {:else}
+                <a
+                    class="p-2 rounded-sm hover:bg-primary/5 text-primary transition w-full flex justify-between items-center"
+                    href="/login"
+                >
+                    Log in
+                    <LogIn class="w-4" />
+                </a>
+            {/if}
             <!-- <a href="/logout">Logout</a> -->
         </div>
     </Popover.Content>

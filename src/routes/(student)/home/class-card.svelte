@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { Class } from "$lib/api/types";
+    import placeholderImage from "$lib/assets/placeholder.png";
 
     export let classInfo: Class
 </script>
@@ -9,7 +10,7 @@
     class="border rounded-md bg-background shadow-sm transition hover:shadow-md"
 >
     <div class="p-4 flex gap-4 items-stretch">
-        <img src="" alt="" class="h-12 w-12" />
+        <img src={placeholderImage} alt="" class="h-12 w-12" />
         <div>
             <h2 class="font-medium">{classInfo.name}</h2>
             <h3 class="text-muted-foreground">{classInfo.code}</h3>

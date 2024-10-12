@@ -2,7 +2,7 @@
     import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
     import { User } from "lucide-svelte";
     import { navigationStack } from "$lib/navigation";
-    import Menu from "./menu.svelte";
+    import UserMenu from "./user-menu.svelte";
     import type { z } from "zod";
     import type { zStudentInfo } from "$lib/api/shared";
 
@@ -29,10 +29,10 @@
                     <Breadcrumb.Separator />
                 {/each}
                 <Breadcrumb.Item>
-                    <Breadcrumb.Page>{last?.name ?? "Page"}</Breadcrumb.Page>
+                    <Breadcrumb.Page>{last?.name ?? "Root"}</Breadcrumb.Page>
                 </Breadcrumb.Item>
             </Breadcrumb.List>
         </Breadcrumb.Root>
     </div>
-    <Menu {auth}/>
+    <UserMenu {auth}/>
 </nav>

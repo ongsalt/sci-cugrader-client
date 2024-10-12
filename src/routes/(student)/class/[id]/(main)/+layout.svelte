@@ -3,6 +3,7 @@
     import Subheader from "$lib/components/sub-header.svelte";
     import { cn } from "$lib/utils/ui";
     import type { LayoutData } from "./$types";
+    import placeholderImage from "$lib/assets/placeholder.png";
 
     export let data: LayoutData;
     const { classMeta } = data;
@@ -14,7 +15,7 @@
 <Subheader
     title={classMeta.name}
     subTitle="{classMeta.code} • {classMeta.semaster}"
-    imageUrl={classMeta.thumbnail}
+    imageUrl={classMeta.thumbnail ?? placeholderImage}
 >
     <div class="mt-3 flex items-center gap-1" slot="description">
         <span class="text-muted-foreground">Instructor</span>
