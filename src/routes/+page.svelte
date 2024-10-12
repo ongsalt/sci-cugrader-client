@@ -19,7 +19,7 @@
 
     <div class="mt-8">
         <p class="text-destructive">
-            This is uncomplete you can't download or submit a file here
+            This is unfinished you can't download or submit a file here.
         </p>
     </div>
 </main>
