@@ -1,4 +1,4 @@
-import { PUBLIC_PROXY_BASE_URL } from "$env/static/public"
+import { env } from "$env/dynamic/public"
 import { Result } from "@badrap/result";
 import { z, ZodError, ZodType, type SafeParseReturnType } from "zod"
 
@@ -30,7 +30,7 @@ export function defineEndpoint<Query extends ZodType, Response extends ZodType, 
 
     return {
         async call(query: z.infer<Query>, fetch = window.fetch): Promise<Result<Transformed, ZodError>> { // assuming no network error
-            const url = new URL(endpoint.path, PUBLIC_PROXY_BASE_URL)
+            const url = new URL(endpoint.path, env.PUBLIC_PROXY_BASE_URL)
             for (const [key, value] of Object.entries(query)) {
                 url.searchParams.set(key, String(value))
             }

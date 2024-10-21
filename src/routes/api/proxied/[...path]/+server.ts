@@ -1,4 +1,4 @@
-import { PUBLIC_BASE_API_URL } from "$env/static/public";
+import { env } from "$env/dynamic/public";
 import type { RequestHandler } from "./$types";
 
 // WHY DIDNT I JUST FUCKING SERIALIZE the COOKIES AND the  BODY TOGETHER 
@@ -20,7 +20,7 @@ const makeHandler = (method: "GET" | "POST"): RequestHandler => async ({ params,
     headers.delete("sec-fetch-dest")
     // headers.set("referer", "https://sci.cugrader.com")
 
-    const target = new URL(params.path, PUBLIC_BASE_API_URL)
+    const target = new URL(params.path, env.PUBLIC_BASE_API_URL)
     url.searchParams.forEach((value, key) => {
         target.searchParams.append(key, value)
     })
