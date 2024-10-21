@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { invalidateAll } from "$app/navigation";
+    import { goto } from "$app/navigation";
     import { loginWithCookie } from "$lib/auth";
 
     const exampleCookie =
@@ -12,7 +12,7 @@
 
     function login() {
         loginWithCookie(cookie, accessToken);
-        invalidateAll()
+        goto("/", { invalidateAll: true })
     }
 </script>
 

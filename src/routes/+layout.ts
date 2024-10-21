@@ -1,5 +1,4 @@
 import { getAuth } from "$lib/api/definitions/auth";
-import { hasAuthToken } from "$lib/auth";
 import type { LayoutLoad } from "./$types";
 
 export const ssr = false
