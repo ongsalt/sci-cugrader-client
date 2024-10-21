@@ -34,7 +34,11 @@ export function defineEndpoint<Query extends ZodType, Response extends ZodType, 
             for (const [key, value] of Object.entries(query)) {
                 url.searchParams.set(key, String(value))
             }
-            // I should make this trpc but... whatever
+            // Ok this doesnt work on cloudflare worker 
+            // fetch on vercel is node's but on cf is its own custom runtime (wintercg spec i guess) 
+            // and for whatever tf reason it doesnt support fetch credentials
+            // LIke wtf this is not a browser api this is a SERVER SIDE API 
+            
             const response = await fetch(url, {
                 // credentials: "include", // it's "same-origin" by default
                 headers: {
