@@ -35,9 +35,9 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@badrap/result": "^0.2.13",
 		"@sveltejs/adapter-cloudflare": "^4.7.3",
 		"@types/js-cookie": "^3.0.6",
-		"js-cookie": "^3.0.5"
+		"js-cookie": "^3.0.5",
+		"neverthrow": "^8.0.0"
 	}
 }

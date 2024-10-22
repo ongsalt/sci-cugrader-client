@@ -7,7 +7,10 @@ export const load: LayoutLoad = async ({ parent, fetch }) => {
     if (auth === null) {
         return error(401, "Unauthorized")
     }
-    const classes = (await getStudentClasses.call({}, fetch)).unwrap()
+    const classes = await getStudentClasses.call({}, fetch)
+    if (classes.isErr()) {
+        return error(500, classes.error)
+    }
     console.log(classes)
     return {
         classes

@@ -1,12 +1,27 @@
 import { getStudentAssignments, getStudentClass } from "$lib/api/definitions/data";
+import { error } from "@sveltejs/kit";
 import type { LayoutLoad } from "./$types";
 
 export const load: LayoutLoad = async ({ params, fetch }) => {
-    const classMeta = getStudentClass.call({ CSYID: parseInt(params.id) }, fetch).then(it => it.unwrap())
-    const assignments = getStudentAssignments.call({ CID: parseInt(params.id) }, fetch).then(it => it.unwrap().unwrap())
+    const [classMeta, assignments] = await Promise.all([
+        getStudentClass.call({ CSYID: parseInt(params.id) }, fetch),
+        getStudentAssignments.call({ CID: parseInt(params.id) }, fetch)
+    ])
+
+    if (classMeta.isErr()) {
+        error(500, classMeta.error)
+    }
+
+    if (assignments.isErr()) {
+        error(500, assignments.error)
+    }
+    
+    if (assignments.value.isErr()) {
+        error(500, assignments.value.error)
+    }
 
     return {
-        classMeta: await classMeta,
-        assignments: await assignments
+        classMeta: classMeta.value,
+        assignments: assignments.value.value
     }
 }

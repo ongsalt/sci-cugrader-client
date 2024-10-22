@@ -1,5 +1,5 @@
 import { env } from "$env/dynamic/public"
-import { Result } from "@badrap/result";
+import { err, ok, Result } from "neverthrow";
 import { z, ZodError, ZodType, type SafeParseReturnType } from "zod"
 
 // We use zod here in case of api definition change. 
@@ -28,17 +28,18 @@ export function defineEndpoint<Query extends ZodType, Response extends ZodType, 
         endpoint.transformer = (it) => it
     }
 
+    // TODO: stop nesting result
     return {
-        async call(query: z.infer<Query>, fetch = window.fetch): Promise<Result<Transformed, ZodError>> { // assuming no network error
+        async call(query: z.infer<Query>, fetch = window.fetch): Promise<Result<Transformed, string>> { // assuming no network error
             const url = new URL(endpoint.path, env.PUBLIC_PROXY_BASE_URL)
             for (const [key, value] of Object.entries(query)) {
                 url.searchParams.set(key, String(value))
             }
+
             // Ok this doesnt work on cloudflare worker 
             // fetch on vercel is node's but on cf is its own custom runtime (wintercg spec i guess) 
             // and for whatever tf reason it doesnt support fetch credentials
             // LIke wtf this is not a browser api this is a SERVER SIDE API 
-            
             const response = await fetch(url, {
                 // credentials: "include", // it's "same-origin" by default
                 headers: {
@@ -51,9 +52,9 @@ export function defineEndpoint<Query extends ZodType, Response extends ZodType, 
 
             const result: SafeParseReturnType<any, z.infer<Response>> = await endpoint.response.safeParseAsync(JSON.parse(t))
             if (result.success) {
-                return Result.ok(endpoint.transformer!(result.data))
+                return ok(endpoint.transformer!(result.data))
             } else {
-                return Result.err(result.error)
+                return err(`API definition changed: ${result.error.message}`)
             }
         }
     }

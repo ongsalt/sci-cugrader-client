@@ -8,7 +8,7 @@ export const load: LayoutLoad = async ({ fetch }) => {
     // TODO: error handling
     const auth = (await getAuth.call({}, fetch))
 
-    if (auth.isErr || auth.value.isErr) {
+    if (auth.isErr() || auth.value.isErr()) {
         return {
             auth: null
         }

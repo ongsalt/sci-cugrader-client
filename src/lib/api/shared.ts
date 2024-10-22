@@ -1,4 +1,4 @@
-import { Result } from "@badrap/result";
+import { err, ok, Result } from "neverthrow";
 import validator from "validator";
 import { z, ZodType } from "zod";
 
@@ -31,9 +31,9 @@ export function apiResult<T extends ZodType>(t: T) {
         success: z.literal(true)
     })).transform(it => {
         if (it.success) {
-            return Result.ok(it.data as z.infer<T>)
+            return ok(it.data as z.infer<T>)
         } else {
-            return Result.err(new Error(it.msg))
+            return err(new Error(it.msg))
         }
     })
 }
