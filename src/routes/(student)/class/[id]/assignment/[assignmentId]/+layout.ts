@@ -5,10 +5,10 @@ import type { LayoutLoad } from "./$types";
 export const load: LayoutLoad = async ({ params, parent, fetch }) => {
     const assignmentMeta = await getStudentAssignment.call({ LID: parseInt(params.assignmentId) }, fetch)
     if (assignmentMeta.isErr()) {
-        error(500, assignmentMeta.error)
+        error(418, assignmentMeta.error)
     }
     if (assignmentMeta.value.isErr()) {
-        error(500, assignmentMeta.value.error)
+        error(418, assignmentMeta.value.error)
     }
     return {
         assignment: (await parent()).assignments.find(it => it.id.toString() === params.assignmentId)!,

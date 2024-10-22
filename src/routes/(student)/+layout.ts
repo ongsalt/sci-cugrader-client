@@ -9,7 +9,7 @@ export const load: LayoutLoad = async ({ parent, fetch }) => {
     }
     const classes = await getStudentClasses.call({}, fetch)
     if (classes.isErr()) {
-        return error(500, classes.error)
+        return error(418, classes.error)
     }
     console.log(classes)
     return {

@@ -9,15 +9,15 @@ export const load: LayoutLoad = async ({ params, fetch }) => {
     ])
 
     if (classMeta.isErr()) {
-        error(500, classMeta.error)
+        error(418, classMeta.error)
     }
 
     if (assignments.isErr()) {
-        error(500, assignments.error)
+        error(418, assignments.error)
     }
     
     if (assignments.value.isErr()) {
-        error(500, assignments.value.error)
+        error(418, assignments.value.error)
     }
 
     return {

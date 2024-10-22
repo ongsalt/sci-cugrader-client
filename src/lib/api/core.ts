@@ -54,7 +54,8 @@ export function defineEndpoint<Query extends ZodType, Response extends ZodType, 
             if (result.success) {
                 return ok(endpoint.transformer!(result.data))
             } else {
-                return err(`API definition changed: ${result.error.message}`)
+                console.error(result.error)
+                return err("API definition changed")
             }
         }
     }
