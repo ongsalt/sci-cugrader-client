@@ -13,6 +13,6 @@ export const load: LayoutLoad = async ({ parent, fetch }) => {
     }
     console.log(classes)
     return {
-        classes
+        classes: classes.value
     }
 }

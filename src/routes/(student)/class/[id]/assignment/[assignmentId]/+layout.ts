@@ -12,6 +12,6 @@ export const load: LayoutLoad = async ({ params, parent, fetch }) => {
     }
     return {
         assignment: (await parent()).assignments.find(it => it.id.toString() === params.assignmentId)!,
-        assignmentMeta
+        assignmentMeta: assignmentMeta.value.value
     }
 }
