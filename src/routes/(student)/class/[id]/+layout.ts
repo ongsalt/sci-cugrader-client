@@ -21,7 +21,9 @@ export const load: LayoutLoad = async ({ params, fetch }) => {
     }
 
     return {
-        classMeta: classMeta.value,
+        meta: {
+            class: classMeta.value,
+        },
         assignments: assignments.value.value
     }
 }

@@ -9,7 +9,7 @@
     }
 
     let { data, children }: Props = $props();
-    defineRoute(data.classMeta.name, `/class/${$page.params.id}`);
+    defineRoute(data.meta.class.name, `/class/${$page.params.id}`);
 </script>
 
 {@render children?.()}
