@@ -3,7 +3,11 @@
     import type { PageData } from "./$types";
     import AssignmentCard from "./assignment-card.svelte";
 
-    export let data: PageData;
+    interface Props {
+        data: PageData;
+    }
+
+    let { data }: Props = $props();
     const { assignments } = data;
     const classId = $page.params.id;
 </script>

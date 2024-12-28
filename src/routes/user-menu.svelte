@@ -6,7 +6,11 @@
     import type { z } from "zod";
 
     // TODO: make a better type
-    export let auth: z.infer<typeof zStudentInfo> | null;
+    interface Props {
+        auth: z.infer<typeof zStudentInfo> | null;
+    }
+
+    let { auth }: Props = $props();
     const _hasAuthToken = hasAuthToken();
 </script>
 
@@ -57,7 +61,11 @@
                     class="p-2 rounded-sm hover:bg-primary/5 text-primary transition w-full flex justify-between items-center"
                     href="/login"
                 >
-                    Log in
+                    {#if _hasAuthToken}
+                        Replace auth token
+                    {:else}
+                        Log in
+                    {/if}
                     <LogIn class="w-4" />
                 </a>
             {/if}

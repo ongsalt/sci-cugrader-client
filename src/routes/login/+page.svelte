@@ -7,8 +7,8 @@
     const exampleJWTToken =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MCwianRpIjoiZWNkMTAwMDAtMjA4MC03ZTc5LTkxYTktMTkzN2ZjMWY0YzBmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJlbWFpbCI6IjYwMDAwMDAwMDBAc3R1ZGVudC5jaHVsYS5hYy50aCIsInVpZCI6IjYwMDAwMDAwMDAiLCJyb2xlIjoxfSwibmJmIjowLCJjc3JmIjoiZWNkMTAwMDAtNDA4MC03MTZhLWFjMjItMjcyYzMwOTQzMjMyIiwiZXhwIjoxMDAwMDAwMDAwMDAwfQ.brRn7CHsi7jfJbcvGDU2du1ssFKbfzgPX3C5a_D1WQk";
 
-    let cookie = "";
-    let accessToken = "";
+    let cookie = $state("");
+    let accessToken = $state("");
 
     function login() {
         loginWithCookie(cookie, accessToken);
@@ -54,7 +54,7 @@
         </div>
         <button
             class="border rounded-md py-2 px-4 bg-primary hover:bg-primary-600 text-white"
-            on:click={login}
+            onclick={login}
         >
             Done
         </button>

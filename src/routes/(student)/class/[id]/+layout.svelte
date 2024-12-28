@@ -3,8 +3,13 @@
     import { page } from "$app/stores";
     import type { LayoutData } from "./$types";
 
-    export let data: LayoutData;
+    interface Props {
+        data: LayoutData;
+        children?: import('svelte').Snippet;
+    }
+
+    let { data, children }: Props = $props();
     defineRoute(data.classMeta.name, `/class/${$page.params.id}`);
 </script>
 
-<slot />
+{@render children?.()}

@@ -1,7 +1,19 @@
 <script lang="ts">
-    export let title: string;
-    export let subTitle: string;
-    export let imageUrl: string | null = null;
+    interface Props {
+        title: string;
+        subTitle: string;
+        imageUrl?: string | null;
+        description?: import('svelte').Snippet;
+        navigation?: import('svelte').Snippet;
+    }
+
+    let {
+        title,
+        subTitle,
+        imageUrl = null,
+        description,
+        navigation
+    }: Props = $props();
 </script>
 
 <header class="bg-background border-b px-4">
@@ -9,13 +21,13 @@
         <div>
             <h2 class="text-lg font-semibold">{title}</h2>
             <h3 class="text-muted-foreground">{subTitle}</h3>
-            <slot name="description"/>
+            {@render description?.()}
         </div>
         {#if imageUrl != null}
             <img src={imageUrl} alt="Icon" class="w-20 h-20" />
         {/if}
     </div>
-    <slot name="navigation">
+    {#if navigation}{@render navigation()}{:else}
         <div class="mt-4"></div>
-    </slot>
+    {/if}
 </header>

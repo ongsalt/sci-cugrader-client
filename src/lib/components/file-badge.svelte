@@ -1,17 +1,29 @@
 <script lang="ts">
+    import { createBubbler } from 'svelte/legacy';
+
+    const bubble = createBubbler();
     import type { MenuAction } from "$lib/action";
     import Menu from "$lib/components/menu.svelte"
     import placeholderImage from "$lib/assets/placeholder2.png"
 
-    export let thumbnailSrc: string | null = null  
-    export let name: string 
-    export let description: string 
-    export let actions: MenuAction[] = []
+    interface Props {
+        thumbnailSrc?: string | null;
+        name: string;
+        description: string;
+        actions?: MenuAction[];
+    }
 
-    $: _thumbnailSrc = thumbnailSrc === "" ? null : thumbnailSrc 
+    let {
+        thumbnailSrc = null,
+        name,
+        description,
+        actions = []
+    }: Props = $props();
+
+    let _thumbnailSrc = $derived(thumbnailSrc === "" ? null : thumbnailSrc) 
 </script>
 
-<button class="rounded border flex gap-2 items-center transition" on:click>
+<button class="rounded border flex gap-2 items-center transition" onclick={bubble('click')}>
     <img
         src={_thumbnailSrc ?? placeholderImage}
         alt="File thumbnail"

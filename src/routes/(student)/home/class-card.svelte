@@ -2,7 +2,11 @@
     import type { Class } from "$lib/api/types";
     import placeholderImage from "$lib/assets/placeholder.png";
 
-    export let classInfo: Class
+    interface Props {
+        classInfo: Class;
+    }
+
+    let { classInfo }: Props = $props();
 </script>
 
 <a

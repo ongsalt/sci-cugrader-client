@@ -4,9 +4,13 @@
     import ClassCard from "./class-card.svelte";
     import type { Class } from "$lib/api/types";
 
-    export let semaster = "2024/1";
-    export let classes: Class[] = [];
-    let open = true;
+    interface Props {
+        semaster?: string;
+        classes?: Class[];
+    }
+
+    let { semaster = "2024/1", classes = [] }: Props = $props();
+    let open = $state(true);
 </script>
 
 <Collapsible.Root bind:open>

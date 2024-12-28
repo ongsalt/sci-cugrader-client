@@ -5,9 +5,13 @@
     import { cn } from "$lib/utils/ui";
     import { MoreHorizontal, Download } from "lucide-svelte";
 
-    export let actions: MenuAction[] = [];
+    interface Props {
+        actions?: MenuAction[];
+    }
 
-    let open = false;
+    let { actions = [] }: Props = $props();
+
+    let open = $state(false);
 </script>
 
 <Popover.Root bind:open>
@@ -25,7 +29,7 @@
                     "p-2 py-1.5 rounded-sm transition w-full flex justify-between items-center hover:bg-accent",
                     type === "destructive" && "hover:bg-destructive/5 text-destructive"
                 )}
-                on:click={() => {
+                onclick={() => {
                     open = false;
                     action();
                 }}

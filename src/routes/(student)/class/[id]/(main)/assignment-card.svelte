@@ -3,8 +3,12 @@
     import type { Assignment } from "$lib/api/types";
     import { formatDate } from "$lib/utils/date";
 
-    export let classId: string;
-    export let assignment: Assignment;
+    interface Props {
+        classId: string;
+        assignment: Assignment;
+    }
+
+    let { classId, assignment }: Props = $props();
 </script>
 
 <a

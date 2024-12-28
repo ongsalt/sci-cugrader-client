@@ -6,10 +6,14 @@
     import type { z } from "zod";
     import type { zStudentInfo } from "$lib/api/shared";
 
-    export let auth: z.infer<typeof zStudentInfo> | null
+    interface Props {
+        auth: z.infer<typeof zStudentInfo> | null;
+    }
 
-    $: last = $navigationStack.at(-1);
-    $: rest = $navigationStack.toSpliced(-1, 1);
+    let { auth }: Props = $props();
+
+    let last = $derived($navigationStack.at(-1));
+    let rest = $derived($navigationStack.toSpliced(-1, 1));
 </script>
 
 <nav

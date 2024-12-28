@@ -5,13 +5,17 @@
     import { formatDate } from "$lib/utils/date";
     import { Trash, Download } from "lucide-svelte";
 
-    export let question: Question;
-    export let index: number;
+    interface Props {
+        question: Question;
+        index: number;
+    }
+
+    let { question, index }: Props = $props();
 
     const { id, date, maxScore, score, submission } = question;
 
-    let files: FileList | null;
-    $: file = files != null ? files[0] : null;
+    let files = $state<FileList | null>(null);
+    let file = $derived(files !== null ? files[0] : null);
 
     function removeFile() {
         files = null;
@@ -62,9 +66,9 @@
                                 name: "Delete",
                                 icon: Trash,
                                 action: () => console.log("test"),
-                                type: "destructive"
+                                type: "destructive",
                             },
-                        ]}    
+                        ]}
                     />
                 </div>
             {/if}
@@ -72,30 +76,19 @@
     </div>
     <div class="p-4">
         <input type="file" id="file-input-{id}" hidden bind:files />
-        {#if file == null}
-            <label
-                for="file-input-{id}"
-                class="block cursor-pointer text-center w-full rounded p-4 border border-dashed transition text-muted-foreground hover:bg-accent"
-            >
-                Drag and drop file here or <span
-                    class="underline underline-offset-2"
-                >
-                    Choose file
-                </span>
-            </label>
-        {:else}
+        {#if file !== null}
             <div class="flex flex-wrap justify-between gap-4 items-center">
                 <div>
                     <FileBadge
                         name={file.name}
-                        description={file.size}
+                        description={`${file.size}`}
                         thumbnailSrc=""
                     />
                 </div>
                 <div class="flex gap-2">
                     <button
                         class="border transition hover:bg-accent px-4 py-2 rounded-md"
-                        on:click={removeFile}
+                        onclick={removeFile}
                     >
                         Remove
                     </button>
@@ -106,6 +99,17 @@
                     </button>
                 </div>
             </div>
+        {:else}
+            <label
+                for="file-input-{id}"
+                class="block cursor-pointer text-center w-full rounded p-4 border border-dashed transition text-muted-foreground hover:bg-accent"
+            >
+                Drag and drop file here or <span
+                    class="underline underline-offset-2"
+                >
+                    Choose file
+                </span>
+            </label>
         {/if}
     </div>
 </div>
