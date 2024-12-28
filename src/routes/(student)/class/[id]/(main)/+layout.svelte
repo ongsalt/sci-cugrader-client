@@ -11,21 +11,21 @@
     }
 
     let { data, children }: Props = $props();
-    const { classMeta } = data;
+    const { meta } = data;
     const classId = $page.params.id;
 
     let isPortfolioPage = $derived($page.url.pathname == `/class/${classId}/portfolio`);
 </script>
 
 <Subheader
-    title={classMeta.name}
-    subTitle="{classMeta.code} • {classMeta.semaster}"
-    imageUrl={classMeta.thumbnail ?? placeholderImage}
+    title={meta.class.name}
+    subTitle="{meta.class.code} • {meta.class.semaster}"
+    imageUrl={meta.class.thumbnail ?? placeholderImage}
 >
     {#snippet description()}
         <div class="mt-3 flex items-center gap-1" >
             <span class="text-muted-foreground">Instructor</span>
-            <p>{classMeta.instructor}</p>
+            <p>{meta.class.instructor}</p>
         </div>
     {/snippet}
 

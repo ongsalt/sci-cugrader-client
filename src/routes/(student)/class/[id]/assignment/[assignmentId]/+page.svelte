@@ -7,7 +7,7 @@
     }
 
     let { data }: Props = $props();
-    const { questions } = data.assignmentMeta;
+    const { questions } = data.meta.assignment;
 </script>
 
 <main

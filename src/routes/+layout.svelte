@@ -1,12 +1,14 @@
 <script lang="ts">
-    import "../app.css";
+    import { Toaster } from "$lib/components/ui/sonner/index.js";
     import { ModeWatcher } from "mode-watcher";
-    import Header from "./header.svelte";
+    import type { Snippet } from "svelte";
+    import "../app.css";
     import type { LayoutData } from "./$types";
+    import Header from "./header.svelte";
 
     interface Props {
         data: LayoutData;
-        children?: import('svelte').Snippet;
+        children?: Snippet;
     }
 
     let { data, children }: Props = $props();
@@ -17,7 +19,8 @@
 </svelte:head>
 
 <ModeWatcher />
+<Toaster />
 <div class="min-h-screen flex flex-col bg-neutral-50 dark:bg-neutral-900">
-    <Header auth={data.auth}/>
+    <Header auth={data.auth} />
     {@render children?.()}
 </div>

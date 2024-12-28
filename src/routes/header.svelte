@@ -5,6 +5,7 @@
     import UserMenu from "./user-menu.svelte";
     import type { z } from "zod";
     import type { zStudentInfo } from "$lib/api/shared";
+    import ThemeToggle from "$lib/components/theme-toggle.svelte";
 
     interface Props {
         auth: z.infer<typeof zStudentInfo> | null;
@@ -38,5 +39,8 @@
             </Breadcrumb.List>
         </Breadcrumb.Root>
     </div>
-    <UserMenu {auth}/>
+    <div class="flex gap-4">
+        <ThemeToggle />
+        <UserMenu {auth}/>
+    </div>
 </nav>
