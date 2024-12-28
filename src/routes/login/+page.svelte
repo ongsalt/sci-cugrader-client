@@ -1,6 +1,7 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
     import { loginWithCookie } from "$lib/auth";
+    import { defineRoute } from "$lib/navigation";
 
     const exampleCookie =
         "mysession=44O744O7IOODu+ODvOODu+ODuyDjg7zjg7zjg7wg44O744O744O744O8IOODu+ODsOS4lueVjOaDhee3kgo=; csrf_access_token=a37ee142c-4080-7cc5-95a5-ae36e504bda5; email=6000000000@student.chula.ac.th; uid=6000000000; csrf_token=a37ee142c-4080-7546-b522-a320b36fc3c1; role=1; Name=Mr.%20Alfred%20Russel%20Wallace; Email=6000000000@student.chula.ac.th";
@@ -14,6 +15,14 @@
         loginWithCookie(cookie, accessToken);
         goto("/", { invalidateAll: true })
     }
+
+    $effect(() => {
+        if (cookie.startsWith("'") && cookie.endsWith("'")) {
+            cookie = cookie.slice(1, -1)
+        }
+    })
+
+    defineRoute("Login")
 </script>
 
 <div class="p-6 flex items-center justify-center flex-1">
