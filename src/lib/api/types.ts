@@ -19,7 +19,10 @@ export type AssignmentMeta = {
         isLocked: boolean,
         name: string,
         lab: string,
-        attachmentIds: number[]
+        attachments: {
+            name: string,
+            id: number
+        }[]
     },
     questions: Question[]
 }

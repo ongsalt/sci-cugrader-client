@@ -54,12 +54,15 @@ export function defineEndpoint<Query extends ZodType, Response extends ZodType, 
             }
 
             // idk why i need type hint here
-            const t = await response.text()
+            const json = await response.json()
 
-            const result: SafeParseReturnType<any, z.infer<Response>> = await endpoint.response.safeParseAsync(JSON.parse(t))
+            const result: SafeParseReturnType<any, z.infer<Response>> = await endpoint.response.safeParseAsync(json)
             if (result.success) {
                 return ok(endpoint.transformer!(result.data))
             } else {
+                console.log({
+                    received: json,
+                })
                 console.error(result.error)
                 return err("definition-changed")
             }
