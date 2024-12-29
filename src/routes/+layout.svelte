@@ -4,9 +4,6 @@
     import type { Snippet } from "svelte";
     import "../app.css";
     import type { LayoutData } from "./$types";
-    import Header from "./header.svelte";
-    import AppSidebar from "./app-sidebar.svelte";
-    import * as Sidebar from "$lib/components/ui/sidebar/index.js";
 
     interface Props {
         data: LayoutData;
@@ -24,11 +21,5 @@
 <Toaster />
 
 <div class="min-h-screen flex flex-col bg-neutral-50 dark:bg-neutral-900">
-    <Sidebar.Provider>
-        <AppSidebar />
-        <div class="w-full">
-            <Header auth={data.auth} />
-            {@render children?.()}
-        </div>
-    </Sidebar.Provider>
+    {@render children?.()}
 </div>
