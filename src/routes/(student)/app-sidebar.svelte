@@ -6,7 +6,7 @@
     import Settings from "lucide-svelte/icons/settings";
     import * as Sidebar from "$lib/components/ui/sidebar/index.js";
     import { Button } from "$lib/components/ui/button";
-    import { PanelLeftIcon } from "lucide-svelte";
+    import { HomeIcon, PanelLeftIcon } from "lucide-svelte";
     import type { LayoutData } from "./$types";
 
     type Props = {
@@ -26,12 +26,30 @@
         <!-- <h1 class="font-medium">37</h1> -->
     </Sidebar.Header>
     <Sidebar.Content>
-        {#each Object.entries(classes) as [semaster, classesInSemaster]}
+        <Sidebar.Group>
+            <Sidebar.GroupLabel>Navigation</Sidebar.GroupLabel>
+            <Sidebar.GroupContent>
+                <Sidebar.Menu>
+                    <Sidebar.MenuItem>
+                        <Sidebar.MenuButton>
+                            {#snippet child({ props })}
+                                <a href="/home" {...props}>
+                                    <HomeIcon />
+                                    <span>Home</span>
+                                </a>
+                            {/snippet}
+                        </Sidebar.MenuButton>
+                    </Sidebar.MenuItem>
+                </Sidebar.Menu>
+            </Sidebar.GroupContent>
+        </Sidebar.Group>
+
+        {#each Object.entries(classes) as [semester, classesInSemester]}
             <Sidebar.Group>
-                <Sidebar.GroupLabel>{semaster}</Sidebar.GroupLabel>
+                <Sidebar.GroupLabel>{semester}</Sidebar.GroupLabel>
                 <Sidebar.GroupContent>
                     <Sidebar.Menu>
-                        {#each classesInSemaster as { id, name } (id)}
+                        {#each classesInSemester as { id, name } (id)}
                             <Sidebar.MenuItem>
                                 <Sidebar.MenuButton>
                                     {#snippet child({ props })}

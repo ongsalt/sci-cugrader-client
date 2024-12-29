@@ -1,18 +1,12 @@
-# create-svelte
-
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+## TODO
+- [ ] File 
+    - [ ] downloading
+    - [ ] uploading (probably gonna be painful)
+- [ ] Batch download
+- [ ] Batch submission
+- [ ] Rework QuestionCard
+- [ ] Find better way to deal with CORS
+- [ ] Better authentication porcess
 
 ## Developing
 

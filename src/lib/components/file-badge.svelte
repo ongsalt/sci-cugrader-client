@@ -1,29 +1,27 @@
 <script lang="ts">
-    import { createBubbler } from 'svelte/legacy';
+    import placeholderImage from "$lib/assets/placeholder2.png";
+    import Menu from "$lib/components/menu.svelte";
 
-    const bubble = createBubbler();
-    import type { MenuAction } from "$lib/action";
-    import Menu from "$lib/components/menu.svelte"
-    import placeholderImage from "$lib/assets/placeholder2.png"
-
-    interface Props {
-        thumbnailSrc?: string | null;
-        name: string;
-        description: string;
-        actions?: MenuAction[];
+    type Props = {
+        thumbnailSrc?: string
+        name: string,
+        description: string,
+        download?: () => unknown,
+        resubmit?: () => unknown
     }
 
     let {
-        thumbnailSrc = null,
+        thumbnailSrc,
         name,
         description,
-        actions = []
+        download,
+        resubmit
     }: Props = $props();
 
     let _thumbnailSrc = $derived(thumbnailSrc === "" ? null : thumbnailSrc) 
 </script>
 
-<button class="rounded border flex gap-2 items-center transition" onclick={bubble('click')}>
+<div class="rounded border flex gap-2 items-center transition">
     <img
         src={_thumbnailSrc ?? placeholderImage}
         alt="File thumbnail"
@@ -33,7 +31,4 @@
         <p>{name}</p>
         <p class="text-muted-foreground">{description}</p>
     </div>
-    <div class="mr-1">
-        <Menu {actions}/>
-    </div>
-</button>
+</div>

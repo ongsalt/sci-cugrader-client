@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Question } from "$lib/api/types";
+    import type { AssignmentMeta, Question } from "$lib/api/types";
     import FileBadge from "$lib/components/file-badge.svelte";
     import ScoreBadge from "$lib/components/score-badge.svelte";
     import { formatDate } from "$lib/utils/date";
@@ -38,13 +38,6 @@
                     name="[TODO: parse file name]"
                     description={formatDate(date)}
                     thumbnailSrc=""
-                    actions={[
-                        {
-                            name: "Download",
-                            icon: Download,
-                            action: () => console.log("test"),
-                        },
-                    ]}
                 />
             </div>
         </div>
@@ -56,19 +49,6 @@
                         name={submission.filename}
                         description={formatDate(submission.date)}
                         thumbnailSrc=""
-                        actions={[
-                            {
-                                name: "Download",
-                                icon: Download,
-                                action: () => console.log("test"),
-                            },
-                            {
-                                name: "Delete",
-                                icon: Trash,
-                                action: () => console.log("test"),
-                                type: "destructive",
-                            },
-                        ]}
                     />
                 </div>
             {/if}

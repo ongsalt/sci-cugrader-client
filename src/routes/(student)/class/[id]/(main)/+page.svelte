@@ -13,7 +13,7 @@
 </script>
 
 <main
-    class="p-6 grid md:grid-cols-2 xl:grid-cols-3 max-w-screen-2xl xl:mx-auto gap-6"
+    class="p-6 flex flex-col gap-6"
 >
 
 {#each assignments as assignment}
