@@ -1,3 +1,4 @@
+import type { ErrorKind } from "$lib/api/error";
 import { err, ok, Result } from "neverthrow";
 import validator from "validator";
 import { z, ZodType } from "zod";
@@ -33,7 +34,7 @@ export function apiResult<T extends ZodType>(t: T) {
         if (it.success) {
             return ok(it.data as z.infer<T>)
         } else {
-            return err(new Error(it.msg))
+            return err<never, ErrorKind>("definition-changed")
         }
     })
 }

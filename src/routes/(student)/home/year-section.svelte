@@ -13,7 +13,7 @@
     let open = $state(true);
 </script>
 
-<Collapsible.Root bind:open>
+<Collapsible.Root {open} onOpenChange={it => (open = it)}>
     <Collapsible.Trigger class="flex gap-2 items-center">
         {#if open}
             <ChevronDown />

@@ -7,7 +7,7 @@
 
     let { children }: Props = $props();
 
-    defineRoute("Home", "/home");    
+    defineRoute("Home", "/home");
 </script>
 
 {@render children?.()}

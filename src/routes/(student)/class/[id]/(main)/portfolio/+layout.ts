@@ -5,10 +5,14 @@ import type { LayoutLoad } from "./$types";
 export const load: LayoutLoad = async ({ params, fetch }) => {
     const ranking = await getStudentRank.call({ CSYID: parseInt(params.id) }, fetch)
     if (ranking.isErr()) {
-        return error(418, ranking.error)
+        return error(418, {
+            kind: ranking.error
+        })
     }
     if (ranking.value.isErr()) {
-        return error(418, ranking.value.error)
+        return error(418, {
+            kind: ranking.value.error
+        })
     }
     return {
         ranking: ranking.value.value

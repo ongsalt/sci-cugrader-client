@@ -1,11 +1,13 @@
 <script lang="ts">
-    import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
-    import { User } from "lucide-svelte";
-    import { navigationStack } from "$lib/navigation";
-    import UserMenu from "./user-menu.svelte";
-    import type { z } from "zod";
     import type { zStudentInfo } from "$lib/api/shared";
     import ThemeToggle from "$lib/components/theme-toggle.svelte";
+    import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
+    import Button from "$lib/components/ui/button/button.svelte";
+    import { useSidebar } from "$lib/components/ui/sidebar";
+    import { navigationStack } from "$lib/navigation";
+    import { PanelLeftIcon } from "lucide-svelte";
+    import type { z } from "zod";
+    import UserMenu from "./user-menu.svelte";
 
     interface Props {
         auth: z.infer<typeof zStudentInfo> | null;
@@ -15,13 +17,24 @@
 
     let last = $derived($navigationStack.at(-1));
     let rest = $derived($navigationStack.toSpliced(-1, 1));
+
+    const sidebar = useSidebar();
 </script>
 
 <nav
-    class="top-0 z-10 sticky bg-background/80 backdrop-blur border-b px-4 py-2 flex items-center justify-between"
+    class="top-0 z-10 sticky bg-background/80 backdrop-blur border-b px-4 pl-2 py-2 flex items-center justify-between"
 >
     <div class="flex gap-4 items-center">
-        <h1 class="font-medium">37</h1>
+        {#if sidebar.isMobile}
+            <Button
+                variant="ghost"
+                size="icon"
+                onclick={() => sidebar.toggle()}
+            >
+                <PanelLeftIcon />
+            </Button>
+        {/if}
+        <h1 class="font-medium {sidebar.isMobile ? '' : 'pl-2'}">37</h1>
         <div class="h-5 border-r-2"></div>
         <Breadcrumb.Root>
             <Breadcrumb.List>
@@ -41,6 +54,6 @@
     </div>
     <div class="flex gap-4">
         <ThemeToggle />
-        <UserMenu {auth}/>
+        <UserMenu {auth} />
     </div>
 </nav>

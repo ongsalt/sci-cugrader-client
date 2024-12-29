@@ -1,4 +1,5 @@
 import { getAuth } from "$lib/api/definitions/auth";
+import { error } from "@sveltejs/kit";
 import type { LayoutLoad } from "./$types";
 
 export const ssr = false
@@ -9,9 +10,9 @@ export const load: LayoutLoad = async ({ fetch }) => {
     const auth = (await getAuth.call({}, fetch))
 
     if (auth.isErr() || auth.value.isErr()) {
-        return {
-            auth: null
-        }
+        return error(418, {
+            kind: "unauthorized"
+        })
     }
     
     return {

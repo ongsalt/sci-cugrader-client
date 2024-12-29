@@ -1,6 +1,7 @@
 import { env } from "$env/dynamic/public"
+import type { APIErrorKind, ErrorKind } from "$lib/api/error";
 import { err, ok, Result } from "neverthrow";
-import { z, ZodError, ZodType, type SafeParseReturnType } from "zod"
+import { never, z, ZodError, ZodType, type SafeParseReturnType } from "zod"
 
 // We use zod here in case of api definition change. 
 
@@ -30,7 +31,7 @@ export function defineEndpoint<Query extends ZodType, Response extends ZodType, 
 
     // TODO: stop nesting result
     return {
-        async call(query: z.infer<Query>, fetch = window.fetch): Promise<Result<Transformed, string>> { // assuming no network error
+        async call(query: z.infer<Query>, fetch = window.fetch): Promise<Result<Transformed, APIErrorKind>> { // assuming no network error
             const url = new URL(endpoint.path, env.PUBLIC_PROXY_BASE_URL)
             for (const [key, value] of Object.entries(query)) {
                 url.searchParams.set(key, String(value))
@@ -47,6 +48,11 @@ export function defineEndpoint<Query extends ZodType, Response extends ZodType, 
                 },
                 ...(endpoint.requestInit)
             })
+
+            if (!response.ok) {
+                return err("network")
+            }
+
             // idk why i need type hint here
             const t = await response.text()
 
@@ -55,8 +61,9 @@ export function defineEndpoint<Query extends ZodType, Response extends ZodType, 
                 return ok(endpoint.transformer!(result.data))
             } else {
                 console.error(result.error)
-                return err("API definition changed")
+                return err("definition-changed")
             }
         }
     }
 }
+
