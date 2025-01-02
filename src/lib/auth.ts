@@ -12,3 +12,12 @@ export function loginWithCookie(cookie: string, accessToken: string) {
 export function hasAuthToken() {
   return document.cookie !== ""
 }
+
+export function getCsrfToken(): string {
+  return getCookie("csrf_token")
+}
+
+export function getCookie(name: string) {
+  const cookiestring = RegExp(name + "=[^;]+").exec(document.cookie);
+  return decodeURIComponent(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./, "") : "");
+}

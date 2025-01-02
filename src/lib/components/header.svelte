@@ -1,10 +1,8 @@
 <script lang="ts">
     import type { zStudentInfo } from "$lib/api/shared";
-    import ThemeToggle from "$lib/components/theme-toggle.svelte";
-    import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
+    import Navigator from "$lib/components/navigator.svelte";
     import Button from "$lib/components/ui/button/button.svelte";
     import { useSidebar } from "$lib/components/ui/sidebar";
-    import { navigationStack } from "$lib/navigation";
     import { PanelLeftIcon } from "lucide-svelte";
     import type { z } from "zod";
     import UserMenu from "./user-menu.svelte";
@@ -14,9 +12,6 @@
     }
 
     let { auth }: Props = $props();
-
-    let last = $derived($navigationStack.at(-1));
-    let rest = $derived($navigationStack.toSpliced(-1, 1));
 
     const sidebar = useSidebar();
 </script>
@@ -40,24 +35,10 @@
         {:else}
             <div class="w-0"></div>
         {/if}
-        <Breadcrumb.Root>
-            <Breadcrumb.List>
-                {#each rest as route}
-                    <Breadcrumb.Item>
-                        <Breadcrumb.Link href={route.route}
-                            >{route.name}</Breadcrumb.Link
-                        >
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Separator />
-                {/each}
-                <Breadcrumb.Item>
-                    <Breadcrumb.Page>{last?.name ?? "Root"}</Breadcrumb.Page>
-                </Breadcrumb.Item>
-            </Breadcrumb.List>
-        </Breadcrumb.Root>
+
+        <Navigator />
     </div>
     <div class="flex gap-4">
-        <ThemeToggle />
         <UserMenu {auth} />
     </div>
 </nav>

@@ -10,9 +10,9 @@ export const load: LayoutLoad = async ({ fetch }) => {
     const auth = (await getAuth.call({}, fetch))
 
     if (auth.isErr() || auth.value.isErr()) {
-        return error(418, {
-            kind: "unauthorized"
-        })
+        return {
+            auth: null
+        }
     }
     
     return {

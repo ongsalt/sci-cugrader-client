@@ -5,7 +5,6 @@
         data: PageData;
     }
 
-    let { data }: Props = $props();
 </script>
 
 <main class="p-6">
