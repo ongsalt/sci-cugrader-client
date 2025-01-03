@@ -3,7 +3,7 @@ import { error } from "@sveltejs/kit";
 import type { LayoutLoad } from "./$types";
 
 export const load: LayoutLoad = async ({ parent, fetch }) => {
-    const auth = await parent()
+    const { auth } = await parent()
     if (auth === null) {
         return error(418, {
             kind: "unauthorized"
