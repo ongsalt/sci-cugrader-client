@@ -1,17 +1,14 @@
 <script lang="ts">
     import type { zStudentInfo } from "$lib/api/shared";
     import { hasAuthToken } from "$lib/auth";
-    import { buttonVariants } from "$lib/components/ui/button/index.js";
-    import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
     import * as Popover from "$lib/components/ui/popover";
     import {
         Check,
         LogIn,
         LogOut,
-        Menu,
         SunMoon,
         User,
-        UserX,
+        UserX
     } from "lucide-svelte";
     import Moon from "lucide-svelte/icons/moon";
     import Sun from "lucide-svelte/icons/sun";
@@ -56,11 +53,13 @@
     <Popover.Content
         class="p-0 w-64 bg-background/75 backdrop-blur shadow-black/5"
     >
-        {#if page === "main"}
-            {@render main()}
-        {:else if page === "theme"}
-            {@render themePage()}
-        {/if}
+        <div>
+            {#if page === "main"}
+                {@render main()}
+            {:else if page === "theme"}
+                {@render themePage()}
+            {/if}
+        </div>
     </Popover.Content>
 </Popover.Root>
 
