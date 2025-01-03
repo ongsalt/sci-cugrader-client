@@ -1,14 +1,18 @@
 <script lang="ts">
     import type { zStudentInfo } from "$lib/api/shared";
     import { hasAuthToken } from "$lib/auth";
+    import AnimatedSize from "$lib/components/animations/animated-size.svelte";
+    import Button from "$lib/components/ui/button/button.svelte";
     import * as Popover from "$lib/components/ui/popover";
     import {
         Check,
+        ChevronLeft,
+        ChevronRight,
         LogIn,
         LogOut,
         SunMoon,
         User,
-        UserX
+        UserX,
     } from "lucide-svelte";
     import Moon from "lucide-svelte/icons/moon";
     import Sun from "lucide-svelte/icons/sun";
@@ -53,13 +57,13 @@
     <Popover.Content
         class="p-0 w-64 bg-background/75 backdrop-blur shadow-black/5"
     >
-        <div>
+        <AnimatedSize contentKey={page} reverse={page === "main"}>
             {#if page === "main"}
                 {@render main()}
             {:else if page === "theme"}
                 {@render themePage()}
             {/if}
-        </div>
+        </AnimatedSize>
     </Popover.Content>
 </Popover.Root>
 
@@ -84,28 +88,35 @@
             class="p-2 pr-3 rounded-sm hover:bg-foreground/5 transition w-full flex justify-between items-center"
             onclick={to("theme")}
         >
-            Theme
-            <Sun class="w-4" />
+            <div class="flex items-center gap-3">
+                <Sun class="w-4" />
+                Theme
+            </div>
+            <ChevronRight class="w-4" />
         </button>
         {#if auth !== null}
             <a
                 class="p-2 pr-3 rounded-sm hover:bg-destructive/5 text-destructive transition w-full flex justify-between items-center"
                 href="/logout"
             >
-                Log out
-                <LogOut class="w-4" />
+                <div class="flex items-center gap-3">
+                    <LogOut class="w-4" />
+                    Log out
+                </div>
             </a>
         {:else}
             <a
                 class="p-2 pr-3 rounded-sm hover:bg-primary/5 text-primary transition w-full flex justify-between items-center"
                 href="/login"
             >
-                {#if _hasAuthToken}
-                    Replace auth token
-                {:else}
-                    Log in
-                {/if}
-                <LogIn class="w-4" />
+                <div class="flex items-center gap-3">
+                    <LogIn class="w-4" />
+                    {#if _hasAuthToken}
+                        Replace auth token
+                    {:else}
+                        Log in
+                    {/if}
+                </div>
             </a>
         {/if}
         <!-- <a href="/logout">Logout</a> -->
@@ -113,14 +124,11 @@
 {/snippet}
 
 {#snippet themePage()}
-    <div class="border-b p-2">
-        <div class="flex items-center gap-2">
-            <button
-                class="rounded-full overflow-clip w-9 h-9 bg-muted-foreground/10 flex items-center justify-center hover:bg-muted-foreground/15 transition"
-                onclick={to("main")}
-            >
-                <ArrowLeft class="w-5" />
-            </button>
+    <div class="border-b p-1">
+        <div class="flex items-center gap-1">
+            <Button variant="ghost" size="icon" onclick={to("main")}>
+                <ChevronLeft class="w-4" />
+            </Button>
             <span class="font-medium"> Theme </span>
         </div>
     </div>
@@ -130,40 +138,34 @@
             onclick={() => setMode("light")}
         >
             <div class="flex items-center gap-3">
-                <Check
-                    class="w-4 {$userPrefersMode !== 'light'
-                        ? 'opacity-0'
-                        : ''}"
-                />
+                <Sun class="w-4" />
                 Light
             </div>
-            <Sun class="w-4" />
+            {@render check($userPrefersMode !== "light")}
         </button>
         <button
             class="p-2 pr-3 rounded-sm hover:bg-foreground/5 transition w-full flex justify-between items-center"
             onclick={() => setMode("dark")}
         >
             <div class="flex items-center gap-3">
-                <Check
-                    class="w-4 {$userPrefersMode !== 'dark' ? 'opacity-0' : ''}"
-                />
+                <Moon class="w-4" />
                 Dark
             </div>
-            <Moon class="w-4" />
+            {@render check($userPrefersMode !== "dark")}
         </button>
         <button
             class="p-2 pr-3 rounded-sm hover:bg-foreground/5 transition w-full flex justify-between items-center"
             onclick={() => resetMode()}
         >
             <div class="flex items-center gap-3">
-                <Check
-                    class="w-4 {$userPrefersMode !== 'system'
-                        ? 'opacity-0'
-                        : ''}"
-                />
+                <SunMoon class="w-4" />
                 System
             </div>
-            <SunMoon class="w-4" />
+            {@render check($userPrefersMode !== "system")}
         </button>
     </div>
+{/snippet}
+
+{#snippet check(checked: boolean)}
+    <Check class="w-4 {checked ? 'opacity-0' : ''}" />
 {/snippet}

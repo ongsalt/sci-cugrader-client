@@ -1,7 +1,7 @@
-import { env } from "$env/dynamic/public"
-import type { APIErrorKind, ErrorKind } from "$lib/api/error";
+import { env } from "$env/dynamic/public";
+import type { APIErrorKind } from "$lib/api/error";
 import { err, ok, Result } from "neverthrow";
-import { never, z, ZodError, ZodType, type SafeParseReturnType } from "zod"
+import { z, ZodType, type SafeParseReturnType } from "zod";
 
 // We use zod here in case of api definition change. 
 
@@ -53,7 +53,6 @@ export function defineEndpoint<Query extends ZodType, Response extends ZodType, 
                 return err("network")
             }
 
-            // idk why i need type hint here
             const json = await response.json()
 
             const result: SafeParseReturnType<any, z.infer<Response>> = await endpoint.response.safeParseAsync(json)
