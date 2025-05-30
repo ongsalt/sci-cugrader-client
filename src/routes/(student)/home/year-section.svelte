@@ -22,9 +22,11 @@
         {/if}
         <h2 class="font-medium text-lg">{semaster}</h2>
     </Collapsible.Trigger>
-    <Collapsible.Content class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-        {#each classes as classInfo}
+    <Collapsible.Content>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+            {#each classes as classInfo}
             <ClassCard {classInfo} />
-        {/each}
+            {/each}
+        </div>
     </Collapsible.Content>
 </Collapsible.Root>
