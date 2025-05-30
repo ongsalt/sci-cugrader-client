@@ -13,7 +13,9 @@
 
     function login() {
         loginWithCookie(cookie, accessToken);
-        goto("/", { invalidateAll: true })
+        setTimeout(() => {
+            goto("/", { invalidateAll: true })
+        }, 1000)
     }
 
     $effect(() => {
